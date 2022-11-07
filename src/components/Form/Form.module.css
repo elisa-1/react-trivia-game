@@ -1,0 +1,18 @@
+.form {
+  height: 100%;
+  z-index: 50;
+}
+
+.form-label {
+  background: var(--secondary);
+  background: var(--secondary-gradient-linear);
+  padding: 2rem;
+  text-align: center;
+  margin: 0;
+}
+
+@media (max-width: 575.98px) {
+  .form {
+    height: 60%;
+  }
+}

@@ -1,4 +1,28 @@
 main {
-    background-color: grey;
-    height: 100vh;
+  background: var(--secondary);
+  height: 100vh;
+  background-image: url('../assets/white-wave.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  gap: 10rem;
+}
+
+.main-image img {
+  max-width: 30vw;
+  height: auto;
+  border-radius: 50%;
+  -webkit-box-shadow: 10px 10px 60px 60px var(--secondary-lighter);
+  box-shadow: 5px 5px 60px 60px var(--secondary-lighter);
+}
+
+@media (max-width: 575.98px) {
+  main {
+    flex-direction: column-reverse;
+    gap: 1rem;
+  }
+
+  .main-image img {
+    max-width: 40vw;
+  }
 }

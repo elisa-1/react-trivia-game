@@ -4,7 +4,7 @@ import classes from "./FormCheck.module.css";
 const FormCheck = (props) => {
   return (
     <BSForm.Check
-      className={`${classes["custom-form-check"]}`}
+      className={`text-white ${classes["form-check"]}`}
       type="radio"
       label={props.children}
       id={props.id}

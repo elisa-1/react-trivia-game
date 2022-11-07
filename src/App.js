@@ -1,9 +1,13 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./Pages/Home";
 
 function App() {
   return (
-    <div>
-      Trivia Game
-    </div>
+    <Router>
+      <Routes>
+        <Route index element={<Home />} />
+      </Routes>
+    </Router>
   );
 }
 

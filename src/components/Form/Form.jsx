@@ -1,28 +1,17 @@
 import { Form as BSForm } from "react-bootstrap";
 import { UI_TEXT } from "../../services/constants";
+import FormCheck from "./FormCheck";
+import Button from "../UI/Button";
 
 function CheckExample() {
   return (
     <BSForm>
       <BSForm.Label>{UI_TEXT.selectCategoryMessage}</BSForm.Label>
-      <BSForm.Check
-        type="radio"
-        label={"Option 1"}
-        id={"option-1"}
-        name={"group1"}
-      />
-      <BSForm.Check
-        type="radio"
-        label={"Option 2"}
-        id={"option-2"}
-        name={"group1"}
-      />
-      <BSForm.Check
-        type="radio"
-        label={"Option 3"}
-        id={"option-3"}
-        name={"group1"}
-      />
+      <FormCheck id="1">Option 1</FormCheck>
+      <FormCheck id="2">Option 2</FormCheck>
+      <FormCheck id="3">Option 3</FormCheck>
+      <FormCheck id="4">Option 4</FormCheck>
+      <Button>Submit</Button>
     </BSForm>
   );
 }

@@ -1,0 +1,10 @@
+.custom-button {
+  background-color: var(--main);
+  border-color: var(--main);
+}
+
+.custom-button:active,
+.custom-button:hover {
+  background-color: var(--main-darker);
+  border-color: var(--main-darker);
+}

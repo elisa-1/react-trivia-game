@@ -9,4 +9,12 @@ const getCategories = () => {
   return instance.get("/categories");
 };
 
-export { getCategories };
+const getQuestions = (category) => {
+  if (category === "all") {
+    return instance.get(`/questions?limit=15`);
+  } else {
+    return instance.get(`/questions?categories=${category}&limit=15`);
+  }
+};
+
+export { getCategories, getQuestions };

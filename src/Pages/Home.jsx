@@ -29,10 +29,17 @@ const Home = () => {
 
   return (
     <main className="d-flex justify-content-center align-items-center">
-      <Form data={categories} />
-      <div className={`d-flex align-items-center ${styles["main-image"]}`}>
-        <img src={milionnaireLogo} alt="Who Wants to Be a Millionaire logo" />
-      </div>
+      {categories.length > 1 && (
+        <>
+          <Form data={categories} type={"categories"} />
+          <div className={`d-flex align-items-center ${styles["main-image"]}`}>
+            <img
+              src={milionnaireLogo}
+              alt="Who Wants to Be a Millionaire logo"
+            />
+          </div>
+        </>
+      )}
     </main>
   );
 };

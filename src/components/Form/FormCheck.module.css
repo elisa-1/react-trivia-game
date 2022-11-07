@@ -1,6 +1,7 @@
 .form-check {
   padding: 0;
   width: fit-content;
+  font-size: 1rem;
 }
 
 .form-check label {
@@ -24,4 +25,10 @@
 
 .form-check input[type="radio"]:checked + label {
   background: var(--orange);
+}
+
+@media (max-width: 575.98px) {
+  .form-check {
+    font-size: 0.8rem;
+  }
 }

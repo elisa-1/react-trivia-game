@@ -1,7 +1,7 @@
 main {
   background: var(--secondary);
   height: 100vh;
-  background-image: url('../assets/white-wave.png');
+  background-image: url("../assets/white-wave.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -9,20 +9,26 @@ main {
 }
 
 .main-image img {
-  max-width: 30vw;
+  max-width: 25vw;
   height: auto;
   border-radius: 50%;
   -webkit-box-shadow: 10px 10px 60px 60px var(--secondary-lighter);
   box-shadow: 5px 5px 60px 60px var(--secondary-lighter);
 }
 
-@media (max-width: 575.98px) {
+@media (max-width: 800px) {
+  main {
+    gap: 5rem;
+  }
+}
+
+@media (max-width: 576px) {
   main {
     flex-direction: column-reverse;
-    gap: 1rem;
+    gap: 2rem;
   }
 
   .main-image img {
-    max-width: 40vw;
+    max-width: 30vw;
   }
 }

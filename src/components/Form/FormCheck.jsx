@@ -8,7 +8,8 @@ const FormCheck = (props) => {
       type="radio"
       label={props.children}
       id={props.id}
-      name={"group1"}
+      name={props.type}
+      defaultChecked={props.defaultChecked}
     ></BSForm.Check>
   );
 };

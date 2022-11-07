@@ -9,10 +9,16 @@
   padding: 2rem;
   text-align: center;
   margin: 0;
+  font-size: 1.2rem;
 }
 
 @media (max-width: 575.98px) {
   .form {
-    height: 60%;
+    height: 70%;
+  }
+
+  .form-label {
+    padding: 1rem;
+    font-size: 1rem;
   }
 }

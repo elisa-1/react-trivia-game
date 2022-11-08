@@ -5,12 +5,17 @@ import Button from "../UI/Button";
 import styles from "./Form.module.css";
 
 const Form = (props) => {
+  const getSelectedCategory = (value) => {
+    props.onGetSelectedCategory(value);
+  };
+
   const formCheckList = props.data.map((item, index) => (
     <FormCheck
       key={item.toLowerCase().replaceAll(" ", "-")}
       id={item.toLowerCase().replaceAll(" ", "-")}
       defaultChecked={index === 0 ? true : false}
       type={props.type}
+      onClick={() => getSelectedCategory(item)}
     >
       {item}
     </FormCheck>
@@ -19,6 +24,7 @@ const Form = (props) => {
   return (
     <BSForm
       className={`d-flex justify-content-center flex-column text-white ${styles.form}`}
+      onSubmit={props.onSubmit}
     >
       <BSForm.Label
         className={`border border-white mb-3 ${styles["form-label"]}`}
@@ -26,7 +32,7 @@ const Form = (props) => {
         {UI_TEXT.selectCategoryMessage}
       </BSForm.Label>
       {formCheckList}
-      <Button className="mt-3">Submit</Button>
+      <Button className="mt-3" type="submit">Submit</Button>
     </BSForm>
   );
 };

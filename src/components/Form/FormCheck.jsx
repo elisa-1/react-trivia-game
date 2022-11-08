@@ -10,6 +10,7 @@ const FormCheck = (props) => {
       id={props.id}
       name={props.type}
       defaultChecked={props.defaultChecked}
+      onClick={props.onClick}
     ></BSForm.Check>
   );
 };

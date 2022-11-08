@@ -6,6 +6,7 @@ import { getCategories } from "../services/api";
 
 const Home = () => {
   const [categories, setCategories] = useState(["All"]);
+  const [selectedCategory, setSelectedCategory] = useState("All");
 
   useEffect(() => {
     const getData = async () => {
@@ -27,11 +28,25 @@ const Home = () => {
     getData();
   }, []);
 
+  const handleSelectedCategory = (value) => {
+    if (selectedCategory !== value) setSelectedCategory(value);
+  };
+
+  const handleFormSubmit = (ev) => {
+    ev.preventDefault();
+    console.log(selectedCategory, 'submitted');
+  }
+
   return (
     <main className="d-flex justify-content-center align-items-center">
       {categories.length > 1 && (
         <>
-          <Form data={categories} type={"categories"} />
+          <Form
+            data={categories}
+            type={"categories"}
+            onGetSelectedCategory={handleSelectedCategory}
+            onSubmit={handleFormSubmit}
+          />
           <div className={`d-flex align-items-center ${styles["main-image"]}`}>
             <img
               src={milionnaireLogo}

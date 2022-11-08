@@ -1,9 +1,3 @@
 .main-game {
   background-image: url("../assets/game-background.jpg");
 }
-
-.main-game div {
-    background-color: white;
-    height: 60%;
-    width: 20%;
-}

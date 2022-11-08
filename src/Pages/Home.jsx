@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
-import Form from "../components/Form/Form";
-import styles from "./Home.module.css";
-import milionnaireLogo from "../assets/logo-489x489.png";
+import { useNavigate } from "react-router-dom";
 import { getCategories } from "../services/api";
+import { UI_TEXT } from "../services/constants";
+import Form from "../components/Form/Form";
+import milionnaireLogo from "../assets/logo-489x489.png";
+import styles from "./Home.module.css";
 
 const Home = () => {
   const [categories, setCategories] = useState(["All"]);
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getData = async () => {
@@ -34,15 +37,19 @@ const Home = () => {
 
   const handleFormSubmit = (ev) => {
     ev.preventDefault();
-    console.log(selectedCategory, 'submitted');
-  }
+    const category = selectedCategory.toLocaleLowerCase().split(" ")[0];
+    navigate(`/game/${category}`);
+  };
 
   return (
-    <main className="d-flex justify-content-center align-items-center">
+    <main
+      className={`d-flex justify-content-center align-items-center ${styles["main-home"]}`}
+    >
       {categories.length > 1 && (
         <>
           <Form
             data={categories}
+            label={UI_TEXT.selectCategoryMessage}
             type={"categories"}
             onGetSelectedCategory={handleSelectedCategory}
             onSubmit={handleFormSubmit}

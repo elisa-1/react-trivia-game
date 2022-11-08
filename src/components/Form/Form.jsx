@@ -1,5 +1,4 @@
 import { Form as BSForm } from "react-bootstrap";
-import { UI_TEXT } from "../../services/constants";
 import FormCheck from "./FormCheck";
 import Button from "../UI/Button";
 import styles from "./Form.module.css";
@@ -29,7 +28,7 @@ const Form = (props) => {
       <BSForm.Label
         className={`border border-white mb-3 ${styles["form-label"]}`}
       >
-        {UI_TEXT.selectCategoryMessage}
+        {props.label}
       </BSForm.Label>
       {formCheckList}
       <Button className="mt-3" type="submit">Submit</Button>

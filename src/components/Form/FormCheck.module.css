@@ -15,7 +15,7 @@
   background: var(--secondary);
   background: var(--secondary-gradient-linear);
   border: 1px solid white;
-  border-radius: 30%;
+  border-radius: 30%;   
 }
 
 .form-check input[type="radio"] {

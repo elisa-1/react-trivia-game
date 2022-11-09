@@ -5,15 +5,14 @@ import styles from "./Form.module.css";
 
 const Form = (props) => {
   const getSelectedCategory = (value) => {
-    if (props.onGetSelectedCategory)
-      return props.onGetSelectedCategory(value);
+    if (props.onGetSelectedCategory) return props.onGetSelectedCategory(value);
   };
 
   const formCheckList = props.data.map((item, index) => (
     <FormCheck
       key={item.toLowerCase().replaceAll(" ", "-")}
       id={item.toLowerCase().replaceAll(" ", "-")}
-      defaultChecked={index === 0 ? true : false}
+      defaultChecked={props.type === "categories" && index === 0 ? true : false}
       type={props.type}
       onClick={() => getSelectedCategory(item)}
     >

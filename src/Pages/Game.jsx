@@ -57,19 +57,7 @@ const Game = () => {
       }
       localStorage.setItem("questionNo", questionNo);
     }
-
-    // if (questions) {
-    //   let answers = randomSort([
-    //     ...questions[questionNo].incorrectAnswers,
-    //     `${questions[questionNo].correctAnswer} ***`,
-    //   ]);
-
-    //   localStorage.setItem("currentAnswers", JSON.stringify(answers));
-    //   localStorage.setItem("questionNo", questionNo);
-    // }
   }, [questions, questionNo, storedCurrentAnswers]);
-
-  console.log(localStorage.getItem("currentAnswers"));
 
   const randomSort = (values) => {
     return values.sort(() => Math.random() - 0.5);

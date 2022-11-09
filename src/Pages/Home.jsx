@@ -38,6 +38,7 @@ const Home = () => {
   const handleFormSubmit = (ev) => {
     ev.preventDefault();
     const category = selectedCategory.toLocaleLowerCase().split(" ")[0];
+    localStorage.clear();
     navigate(`/game/${category}`);
   };
 

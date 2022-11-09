@@ -7,6 +7,7 @@ import styles from "./Game.module.css";
 const Game = () => {
   const storedQuestions = localStorage.getItem("questions");
   const storedQuestionNo = localStorage.getItem("questionNo");
+  const storedCurrentAnswers = localStorage.getItem("currentAnswers");
 
   const [questions, setQuestions] = useState();
   const [questionNo, setQuestionNo] = useState(
@@ -23,8 +24,16 @@ const Game = () => {
       const getData = async () => {
         const res = await getQuestions(category);
         try {
-          setQuestions(res.data);
-          localStorage.setItem("questions", JSON.stringify(res.data));
+          setQuestions((prev) => {
+            if (!prev) {
+              return res.data;
+            } else {
+              return prev;
+            }
+          });
+          if (!localStorage.getItem("questions")) {
+            localStorage.setItem("questions", JSON.stringify(res.data));
+          }
         } catch (err) {
           console.log(err.message);
         }
@@ -33,37 +42,34 @@ const Game = () => {
     }
   }, [category, storedQuestions]);
 
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     const res = await getQuestions(category);
-  //     try {
-  //       if (res.status === 200) {
-  //         setQuestions((prev) => {
-  //           if (!prev) {
-  //             return [...res.data];
-  //           } else if (prev === JSON.parse(storedQuestions)) {
-  //             return prev;
-  //           }
-  //         });
-  //       }
-  //     } catch (err) {
-  //       console.log("Something went wrong.", err.message);
-  //     }
-  //   };
-  //   getData();
-  // }, [category, storedQuestions]);
-
   useEffect(() => {
     if (questions) {
-      let answers = [
-        ...questions[questionNo].incorrectAnswers,
-        `${questions[questionNo].correctAnswer} ***`,
-      ];
-      randomSort(answers);
-      setCurrentQuestionAnswers(answers);
+      if (storedCurrentAnswers) {
+        const storedCurrentAnswersArr = JSON.parse(storedCurrentAnswers);
+        setCurrentQuestionAnswers(storedCurrentAnswersArr);
+      } else {
+        let answers = randomSort([
+          ...questions[questionNo].incorrectAnswers,
+          `${questions[questionNo].correctAnswer} ***`,
+        ]);
+        setCurrentQuestionAnswers(answers);
+        localStorage.setItem("currentAnswers", JSON.stringify(answers));
+      }
       localStorage.setItem("questionNo", questionNo);
     }
-  }, [questions, questionNo]);
+
+    // if (questions) {
+    //   let answers = randomSort([
+    //     ...questions[questionNo].incorrectAnswers,
+    //     `${questions[questionNo].correctAnswer} ***`,
+    //   ]);
+
+    //   localStorage.setItem("currentAnswers", JSON.stringify(answers));
+    //   localStorage.setItem("questionNo", questionNo);
+    // }
+  }, [questions, questionNo, storedCurrentAnswers]);
+
+  console.log(localStorage.getItem("currentAnswers"));
 
   const randomSort = (values) => {
     return values.sort(() => Math.random() - 0.5);
@@ -73,6 +79,7 @@ const Game = () => {
     ev.preventDefault();
     if (questionNo === questions.length - 1) return;
     setQuestionNo((prevNo) => prevNo + 1);
+    localStorage.removeItem("currentAnswers");
   };
 
   return (
@@ -83,7 +90,7 @@ const Game = () => {
         <>
           <Form
             data={currentQuestionAnswers}
-            label={`${questionNo}. ${questions[questionNo].question}`}
+            label={`${questionNo + 1}. ${questions[questionNo].question}`}
             type={"questions"}
             onSubmit={handleSubmit}
           />

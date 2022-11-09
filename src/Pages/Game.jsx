@@ -7,6 +7,7 @@ import styles from "./Game.module.css";
 const Game = () => {
   const [questions, setQuestions] = useState();
   const [questionNo, setQuestionNo] = useState(0);
+  const [currentQuestionAnswers, setCurrentQuestionAnswers] = useState([]);
   const { category } = useParams();
 
   useEffect(() => {
@@ -27,16 +28,28 @@ const Game = () => {
       }
     };
     getData();
-  }, []);
+  }, [category]);
+
+  useEffect(() => {
+    if (questions) {
+      let answers = [
+        ...questions[questionNo].incorrectAnswers,
+        `${questions[questionNo].correctAnswer} ***`,
+      ];
+      randomSort(answers);
+      setCurrentQuestionAnswers(answers);
+    }
+  }, [questions, questionNo]);
+
+  const randomSort = (values) => {
+    return values.sort(() => Math.random() - 0.5);
+  };
 
   const handleSubmit = (ev) => {
     ev.preventDefault();
-
     if (questionNo === questions.length - 1) return;
     setQuestionNo((prevNo) => prevNo + 1);
   };
-
-  console.log(questions?.length);
 
   return (
     <main
@@ -45,11 +58,8 @@ const Game = () => {
       {questions && (
         <>
           <Form
-            data={[
-              ...questions[questionNo].incorrectAnswers,
-              questions[questionNo].correctAnswer,
-            ]}
-            label={questions[questionNo].question}
+            data={currentQuestionAnswers}
+            label={`${questionNo}. ${questions[questionNo].question}`}
             type={"questions"}
             onSubmit={handleSubmit}
           />

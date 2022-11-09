@@ -5,7 +5,8 @@ import styles from "./Form.module.css";
 
 const Form = (props) => {
   const getSelectedCategory = (value) => {
-    props.onGetSelectedCategory(value);
+    if (props.onGetSelectedCategory)
+      return props.onGetSelectedCategory(value);
   };
 
   const formCheckList = props.data.map((item, index) => (
@@ -31,7 +32,9 @@ const Form = (props) => {
         {props.label}
       </BSForm.Label>
       {formCheckList}
-      <Button className="mt-3" type="submit">Submit</Button>
+      <Button className="mt-3" type="submit">
+        Submit
+      </Button>
     </BSForm>
   );
 };

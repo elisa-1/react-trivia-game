@@ -6,6 +6,7 @@ import styles from "./Game.module.css";
 
 const Game = () => {
   const [questions, setQuestions] = useState();
+  const [questionNo, setQuestionNo] = useState(0);
   const { category } = useParams();
 
   useEffect(() => {
@@ -28,20 +29,32 @@ const Game = () => {
     getData();
   }, []);
 
-  console.log(questions);
+  const handleSubmit = (ev) => {
+    ev.preventDefault();
+
+    if (questionNo === questions.length - 1) return;
+    setQuestionNo((prevNo) => prevNo + 1);
+  };
+
+  console.log(questions?.length);
 
   return (
     <main
       className={`d-flex justify-content-center align-items-center ${styles["main-game"]}`}
     >
       {questions && (
-        <Form
-          data={[...questions[0].incorrectAnswers, questions[0].correctAnswer]}
-          label={questions[0].question}
-          type={"questions"}
-          onGetSelectedCategory={null}
-          onSubmit={null}
-        />
+        <>
+          <Form
+            data={[
+              ...questions[questionNo].incorrectAnswers,
+              questions[questionNo].correctAnswer,
+            ]}
+            label={questions[questionNo].question}
+            type={"questions"}
+            onSubmit={handleSubmit}
+          />
+          <div></div>
+        </>
       )}
     </main>
   );

@@ -18,7 +18,7 @@
   border-color: var(--main-darker) !important;
 }
 
-@media (max-width: 575.98px) {
+@media (max-width: 576px) {
   .button {
     font-size: 0.8rem;
   }

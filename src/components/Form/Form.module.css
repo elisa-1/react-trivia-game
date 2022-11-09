@@ -1,6 +1,8 @@
 .form {
   height: 100%;
+  max-width: 40%;
   z-index: 50;
+  border: 2px solid green;
 }
 
 .form-label {
@@ -10,11 +12,13 @@
   text-align: center;
   margin: 0;
   font-size: 1.2rem;
+  border: 5px solid yellow;
 }
 
-@media (max-width: 575.98px) {
+@media (max-width: 576px) {
   .form {
     height: 70%;
+    max-width: 95%;
   }
 
   .form-label {

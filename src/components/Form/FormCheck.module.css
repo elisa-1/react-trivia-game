@@ -1,14 +1,16 @@
 .form-check {
   padding: 0;
-  width: fit-content;
+  width: auto;
   font-size: 1rem;
+  border: 2px solid red;
 }
 
 .form-check label {
   padding: 0.3rem 1.3rem;
   text-align: justify;
+  min-width: 20rem;
+  width: 100%;
   min-height: 2rem;
-  width: 20rem;
   height: auto;
   cursor: pointer;
   background: var(--secondary);
@@ -27,7 +29,7 @@
   background: var(--orange);
 }
 
-@media (max-width: 575.98px) {
+@media (max-width: 576px) {
   .form-check {
     font-size: 0.8rem;
   }

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getQuestions } from "../services/api";
+import { randomSort } from "../services/utils";
 import Form from "../components/Form/Form";
 import Modal from "../components/UI/Modal";
 import styles from "./Game.module.css";
@@ -16,7 +17,9 @@ const Game = () => {
   );
   const [currentQuestionAnswers, setCurrentQuestionAnswers] = useState([]);
 
-  const [modalShow, setModalShow] = useState(true);
+  const [selectedAnswer, setSelectedAnswer] = useState("");
+
+  const [modalShow, setModalShow] = useState(false);
 
   const { category } = useParams();
 
@@ -62,15 +65,34 @@ const Game = () => {
     }
   }, [questions, questionNo, storedCurrentAnswers]);
 
-  const randomSort = (values) => {
-    return values.sort(() => Math.random() - 0.5);
+  const handleSelectedAnswer = (value) => {
+    if (selectedAnswer !== value) setSelectedAnswer(value);
+  };
+
+  const checkAnswer = () => {
+    const currentCorrectAnswer = questions[questionNo].correctAnswer;
+    if (!selectedAnswer.includes(currentCorrectAnswer)) {
+      setModalShow(true);
+    }
+    if (
+      selectedAnswer.includes(currentCorrectAnswer) &&
+      questionNo < questions.length - 1
+    ) {
+      setQuestionNo((prevNo) => prevNo + 1);
+      localStorage.removeItem("currentAnswers");
+    }
+    if (
+      selectedAnswer.includes(currentCorrectAnswer) &&
+      questionNo === questions.length - 1
+    ) {
+      setModalShow(true);
+    }
   };
 
   const handleSubmit = (ev) => {
     ev.preventDefault();
-    if (questionNo === questions.length - 1) return;
-    setQuestionNo((prevNo) => prevNo + 1);
-    localStorage.removeItem("currentAnswers");
+
+    checkAnswer();
   };
 
   return (
@@ -84,12 +106,13 @@ const Game = () => {
             data={currentQuestionAnswers}
             label={`${questionNo + 1}. ${questions[questionNo].question}`}
             type={"questions"}
+            onGetSelectedOption={handleSelectedAnswer}
             onSubmit={handleSubmit}
           />
           <div></div>
         </>
       )}
-    </main> 
+    </main>
   );
 };
 

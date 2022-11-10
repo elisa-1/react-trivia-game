@@ -5,7 +5,7 @@ import styles from "./Form.module.css";
 
 const Form = (props) => {
   const getSelectedCategory = (value) => {
-    if (props.onGetSelectedCategory) return props.onGetSelectedCategory(value);
+    if (props.onGetSelectedOption) return props.onGetSelectedOption(value);
   };
 
   const formCheckList = props.data.map((item, index) => (

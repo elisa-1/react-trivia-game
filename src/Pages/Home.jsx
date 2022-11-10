@@ -52,7 +52,7 @@ const Home = () => {
             data={categories}
             label={UI_TEXT.selectCategoryMessage}
             type={"categories"}
-            onGetSelectedCategory={handleSelectedCategory}
+            onGetSelectedOption={handleSelectedCategory}
             onSubmit={handleFormSubmit}
           />
           <div className={`d-flex align-items-center ${styles["main-image"]}`}>

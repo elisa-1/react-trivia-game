@@ -9,12 +9,14 @@ const Scoreboard = (props) => {
       {questionValues.map((question, index) => {
         return (
           <li
-            className={`m-0 row 
+            className={`m-0 row ${styles.question}
             ${question.type === "safe" && styles["safe-question"]}
             ${props.questionNo === index && styles["current-question"]}`}
             key={question.value}
           >
-            <span className="col-md-3 col-lg-4 col-xl-6 p-0 text-center">{index + 1}</span>
+            <span className="d-none d-md-inline col-md-3 col-lg-4 col-xl-5 p-0 text-center">
+              {index + 1}
+            </span>
             <span className="col-md-9 col-lg-8 col-xl-6 p-0">
               $ {question.value.toLocaleString()}
             </span>

@@ -19,16 +19,15 @@ main {
   box-shadow: 5px 5px 60px 60px var(--secondary-lighter);
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
   main {
-    gap: 5rem;
+    gap: 2rem;
   }
 }
 
-@media (max-width: 650px) {
+@media (max-width: 900px) {
   main {
     flex-direction: column-reverse;
-    gap: 2rem;
   }
 
   .main-image img {

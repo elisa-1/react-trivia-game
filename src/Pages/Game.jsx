@@ -5,6 +5,7 @@ import { randomSort } from "../services/utils";
 import { ACTIONS, reducer } from "../components/modalReducer";
 import Form from "../components/Form/Form";
 import Modal from "../components/UI/Modal";
+import Scoreboard from "../components/Scoreboard/Scoreboard";
 import styles from "./Game.module.css";
 
 const Game = () => {
@@ -126,7 +127,7 @@ const Game = () => {
             onGetSelectedOption={handleSelectedAnswer}
             onSubmit={handleSubmit}
           />
-          <div></div>
+          <Scoreboard />
         </>
       )}
     </main>

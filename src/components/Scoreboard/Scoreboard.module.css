@@ -1,0 +1,20 @@
+.scoreboard {
+  color: var(--orange);
+  background-color: var(--secondary);
+  -webkit-box-shadow: inset 5px 5px 60px 60px var(--secondary-lighter);
+  box-shadow: inset 5px 5px 60px 60px var(--secondary-lighter);
+  border: 1px solid white;
+  width: 20vw;
+  font-size: 1.2rem;
+  letter-spacing: 0.1rem;
+}
+
+.safe-question {
+    color: white;
+}
+
+@media (max-width: 800px) {
+    .scoreboard {
+        display: none !important;
+    }
+}

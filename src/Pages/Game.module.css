@@ -2,13 +2,6 @@
   background-image: url("../assets/game-background.jpg");
 }
 
-.main-game > div {
-  border: 2px solid red;
-  background-color: #ffffff;
-  width: 20vw;
-  height: 50vh;
-}
-
 @media (max-width: 900px) {
   .main-game > div {
     width: 90vw;

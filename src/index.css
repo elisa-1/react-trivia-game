@@ -15,7 +15,8 @@
     var(--secondary-lighter)
   );
 
-  --orange: #d2a512;
+  --orange: #d29f12;
+  --dark-orange: #cc5500;
 }
 
 body {

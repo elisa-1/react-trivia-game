@@ -28,7 +28,7 @@
   background: var(--orange);
 }
 
-@media (max-width: 576px) {
+@media (max-width: 650px) {
   .form-check {
     font-size: 0.8rem;
   }

@@ -15,17 +15,17 @@ main {
   max-width: 25vw;
   height: auto;
   border-radius: 50%;
-  -webkit-box-shadow: 10px 10px 60px 60px var(--secondary-lighter);
+  -webkit-box-shadow: 5px 5px 60px 60px var(--secondary-lighter);
   box-shadow: 5px 5px 60px 60px var(--secondary-lighter);
 }
 
-@media (max-width: 800px) {
+@media (max-width: 900px) {
   main {
     gap: 5rem;
   }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 650px) {
   main {
     flex-direction: column-reverse;
     gap: 2rem;

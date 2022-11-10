@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getQuestions } from "../services/api";
 import Form from "../components/Form/Form";
+import Modal from "../components/UI/Modal";
 import styles from "./Game.module.css";
 
 const Game = () => {
@@ -14,6 +15,8 @@ const Game = () => {
     storedQuestionNo ? +storedQuestionNo : 0
   );
   const [currentQuestionAnswers, setCurrentQuestionAnswers] = useState([]);
+
+  const [modalShow, setModalShow] = useState(true);
 
   const { category } = useParams();
 
@@ -74,6 +77,7 @@ const Game = () => {
     <main
       className={`d-flex justify-content-center align-items-center ${styles["main-game"]}`}
     >
+      <Modal show={modalShow} onHide={() => setModalShow(false)} />
       {questions && (
         <>
           <Form
@@ -85,7 +89,7 @@ const Game = () => {
           <div></div>
         </>
       )}
-    </main>
+    </main> 
   );
 };
 

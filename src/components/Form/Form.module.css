@@ -13,7 +13,7 @@
   font-size: 1.2rem;
 }
 
-@media (max-width: 576px) {
+@media (max-width: 650px) {
   .form {
     height: 70%;
     max-width: 95%;

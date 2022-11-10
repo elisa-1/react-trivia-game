@@ -7,6 +7,8 @@
   --secondary: #030e3e;
   --secondary-lighter: #024c79aa;
 
+  --custom-bs-backdrop: #0000009d;
+
   --secondary-gradient-linear: linear-gradient(
     var(--secondary-lighter),
     var(--secondary),

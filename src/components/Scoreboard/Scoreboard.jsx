@@ -14,9 +14,8 @@ const Scoreboard = (props) => {
             ${props.questionNo === index && styles["current-question"]}`}
             key={question.value}
           >
-            <span className="col-2"></span>
-            <span className="col-4 p-0 text-center">{index + 1}</span>
-            <span className="col-4 p-0">
+            <span className="col-md-3 col-lg-4 col-xl-6 p-0 text-center">{index + 1}</span>
+            <span className="col-md-9 col-lg-8 col-xl-6 p-0">
               $ {question.value.toLocaleString()}
             </span>
           </li>

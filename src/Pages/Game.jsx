@@ -127,7 +127,7 @@ const Game = () => {
             onGetSelectedOption={handleSelectedAnswer}
             onSubmit={handleSubmit}
           />
-          <Scoreboard />
+          <Scoreboard questionNo={questionNo} />
         </>
       )}
     </main>

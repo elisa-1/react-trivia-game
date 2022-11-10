@@ -13,6 +13,11 @@
     color: white;
 }
 
+.current-question {
+    background-color: var(--dark-orange);
+    color: black;
+}
+
 @media (max-width: 800px) {
     .scoreboard {
         display: none !important;

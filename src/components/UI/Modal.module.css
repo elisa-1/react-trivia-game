@@ -3,16 +3,23 @@
   color: white;
   -webkit-box-shadow: inset 5px 5px 60px 60px var(--secondary-lighter);
   box-shadow: inset 5px 5px 60px 60px var(--secondary-lighter);
+  font-size: 1.5rem;
 }
 
 .modal-backdrop {
   background: var(--custom-bs-backdrop);
-  content: "";
-  background-image: url("../../assets/png/clipart3254873.png");
   background-position: right bottom;
   background-repeat: no-repeat;
-  background-size: 40vh;
+  background-size: 45vh;
   opacity: 1 !important;
+}
+
+.game-won {
+  background-image: url("../../assets/png/game-won-icon.png");
+}
+
+.incorrect-answer {
+  background-image: url("../../assets/png/game-over-icon.png");
 }
 
 @media (max-width: 1300px) {
@@ -23,14 +30,11 @@
 }
 
 @media (max-width: 900px) {
-  .modal-backdrop {
-    background-size: 20vh;
+  .modal-content {
+    font-size: 1rem;
   }
-}
 
-
-@media (max-width: 650px) {
   .modal-backdrop {
-    background-size: 20vh;
+    background-size: 18vh;
   }
 }

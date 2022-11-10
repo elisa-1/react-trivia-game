@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useState, useEffect, useReducer } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { getQuestions } from "../services/api";
 import { randomSort } from "../services/utils";
+import { ACTIONS, reducer } from "../components/modalReducer";
 import Form from "../components/Form/Form";
 import Modal from "../components/UI/Modal";
 import styles from "./Game.module.css";
@@ -16,12 +17,17 @@ const Game = () => {
     storedQuestionNo ? +storedQuestionNo : 0
   );
   const [currentQuestionAnswers, setCurrentQuestionAnswers] = useState([]);
-
   const [selectedAnswer, setSelectedAnswer] = useState("");
-
-  const [modalShow, setModalShow] = useState(false);
+  const [isGameOver, setIsGameOver] = useState(false);
+  const [modalState, dispatch] = useReducer(reducer, {
+    modalShow: false,
+    modalContent: "",
+    modalBackdrop: true,
+    modalAdditionalClass: "",
+  });
 
   const { category } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (storedQuestions && storedQuestions !== "undefined") {
@@ -72,7 +78,8 @@ const Game = () => {
   const checkAnswer = () => {
     const currentCorrectAnswer = questions[questionNo].correctAnswer;
     if (!selectedAnswer.includes(currentCorrectAnswer)) {
-      setModalShow(true);
+      dispatch({ type: ACTIONS.INCORRECT_ANSWER });
+      setIsGameOver(true);
     }
     if (
       selectedAnswer.includes(currentCorrectAnswer) &&
@@ -85,13 +92,13 @@ const Game = () => {
       selectedAnswer.includes(currentCorrectAnswer) &&
       questionNo === questions.length - 1
     ) {
-      setModalShow(true);
+      dispatch({ type: ACTIONS.GAME_WON });
+      setIsGameOver(true);
     }
   };
 
   const handleSubmit = (ev) => {
     ev.preventDefault();
-
     checkAnswer();
   };
 
@@ -99,7 +106,17 @@ const Game = () => {
     <main
       className={`d-flex justify-content-center align-items-center ${styles["main-game"]}`}
     >
-      <Modal show={modalShow} onHide={() => setModalShow(false)} />
+      <Modal
+        show={modalState.modalShow}
+        backdrop={modalState.modalBackdrop}
+        onHide={() => dispatch({ type: ACTIONS.HIDE_MODAL })}
+        content={modalState.modalContent}
+        closeModal={!isGameOver}
+        modalAdditionalClass={modalState.modalAdditionalClass}
+        goToMainMenu={() => {
+          navigate("/");
+        }}
+      />
       {questions && (
         <>
           <Form

@@ -2,11 +2,11 @@ import styles from "./Lifeline.module.css";
 
 const Lifeline = (props) => {
   return (
-    <div
+    <button
       className={`${props.className} d-flex justify-content-center align-items-center text-white ${styles.lifeline}`}
     >
-      Lifeline
-    </div>
+      {props.children}
+    </button>
   );
 };
 

@@ -7,4 +7,6 @@
   background: var(--secondary-gradient-linear);
   -webkit-box-shadow: 5px 5px 20px 20px var(--secondary-lighter);
   box-shadow: 5px 5px 20px 20px var(--secondary-lighter);
+  -webkit-user-select: none;
+  user-select: none;
 }

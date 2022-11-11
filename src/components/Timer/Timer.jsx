@@ -3,23 +3,38 @@ import { ProgressBar as BSProgressBar } from "react-bootstrap";
 import styles from "./Timer.module.css";
 
 const Timer = (props) => {
-  const [remainingTime, setRemainingTime] = useState(props.timerValue);
-  const { handleTimeExpired } = props;
+  const { timerValue, timerIsReset, timerIsPaused, handleTimeExpired } = props;
+  const [remainingTime, setRemainingTime] = useState(timerValue);
+  // const [timeExpired, setTimeExpired] = useState(false);
 
   useEffect(() => {
-    if (remainingTime === 0) {
-      handleTimeExpired();
-      return;
+    let interval;
+
+    if (!timerIsReset) {
+      interval = setInterval(() => {
+        if (!timerIsPaused) {
+          setRemainingTime((prev) => prev - 1);
+        }
+      }, 1000);
     }
-
-    const interval = setInterval(() => {
-      setRemainingTime((prev) => prev - 1);
-    }, 1000);
-
+    if (timerIsReset) {
+      setRemainingTime(timerValue);
+    }
+    if (remainingTime === 0) {
+      if (interval) clearInterval(interval);
+      handleTimeExpired();
+    }
+    
     return () => {
-      clearInterval(interval);
+      if (interval) clearInterval(interval);
     };
-  }, [remainingTime, handleTimeExpired]);
+  }, [
+    timerIsPaused,
+    timerIsReset,
+    remainingTime,
+    handleTimeExpired,
+    timerValue,
+  ]);
 
   return (
     <div className={styles.timer}>

@@ -10,10 +10,10 @@ const LIFELINE_TYPES = {
 const LifelineBar = (props) => {
   return (
     <div
-      className={`d-flex gap-3 ${props.className}`}
+      className={`d-flex gap-3`}
     >
       <Lifeline
-        className={`fw-bold ${props.lifelineClassName}`}
+        className={`fw-bold`}
         onClick={props.onFiftyFifty}
         type={LIFELINE_TYPES.FIFTY_FIFTY}
       >

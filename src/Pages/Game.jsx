@@ -1,4 +1,4 @@
-import { useState, useEffect, useReducer } from "react";
+import { useState, useEffect, useReducer, useCallback } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getQuestions } from "../services/api";
 import { listLetters } from "../services/constants";
@@ -22,6 +22,8 @@ const Game = () => {
   );
   const [currentQuestionAnswers, setCurrentQuestionAnswers] = useState([]);
   const [selectedAnswer, setSelectedAnswer] = useState("");
+  const [timerIsReset, setTimerIsReset] = useState(false);
+  const [timerIsPaused, setTimerIsPaused] = useState(false);
   const [modalState, dispatch] = useReducer(reducer, {
     modalShow: false,
     modalContent: "",
@@ -77,27 +79,11 @@ const Game = () => {
       }
       localStorage.setItem("questionNo", questionNo);
     }
+    setTimerIsReset(false);
   }, [questions, questionNo, storedCurrentAnswers]);
 
   const handleSelectedAnswer = (value) => {
     if (selectedAnswer !== value) setSelectedAnswer(value);
-  };
-
-  const checkAnswer = () => {
-    const currentCorrectAnswer = questions[questionNo].correctAnswer;
-    const isCorrectAnswerSelected =
-      selectedAnswer.includes(currentCorrectAnswer);
-
-    if (!isCorrectAnswerSelected) {
-      dispatch({ type: ACTIONS.INCORRECT_ANSWER });
-    }
-    if (isCorrectAnswerSelected && questionNo < questions.length - 1) {
-      setQuestionNo((prevNo) => prevNo + 1);
-      localStorage.removeItem("currentAnswers");
-    }
-    if (isCorrectAnswerSelected && questionNo === questions.length - 1) {
-      dispatch({ type: ACTIONS.GAME_WON });
-    }
   };
 
   const handleFiftyFifty = () => {
@@ -117,6 +103,58 @@ const Game = () => {
     localStorage.setItem("currentAnswers", JSON.stringify(copiedAnswers));
   };
 
+  const handleAskTheAudience = () => {
+    setTimerIsPaused(true);
+    dispatch({
+      type: ACTIONS.ASK_THE_AUDIENCE_LIFELINE,
+      payload: {
+        answers: currentQuestionAnswers,
+        correctAnswer: questions[questionNo].correctAnswer,
+      },
+    });
+  };
+
+  const handleCallAFriend = () => {
+    setTimerIsPaused(true);
+    dispatch({
+      type: ACTIONS.CALL_FRIEND_LIFELINE,
+      payload: { correctAnswer: questions[questionNo].correctAnswer },
+    });
+  };
+
+  const handleTimeExpired = useCallback(() => {
+    dispatch({ type: ACTIONS.TIME_EXPIRED });
+  }, []);
+
+  const handleHideModal = () => {
+    dispatch({ type: ACTIONS.HIDE_MODAL });
+    setTimerIsPaused(false);
+  };
+
+  const checkAnswer = () => {
+    const currentCorrectAnswer = questions[questionNo].correctAnswer;
+    const isCorrectAnswerSelected =
+      selectedAnswer.includes(currentCorrectAnswer);
+
+    if (!selectedAnswer) {
+      dispatch({ type: ACTIONS.NO_ANSWER_SELECTED });
+    }
+    if (selectedAnswer && !isCorrectAnswerSelected) {
+      dispatch({ type: ACTIONS.INCORRECT_ANSWER });
+    }
+    if (isCorrectAnswerSelected && questionNo < questions.length - 1) {
+      setQuestionNo((prevNo) => prevNo + 1);
+      localStorage.removeItem("currentAnswers");
+      setTimerIsReset(true);
+    }
+    if (isCorrectAnswerSelected && questionNo === questions.length - 1) {
+      dispatch({ type: ACTIONS.GAME_WON });
+    }
+    setSelectedAnswer("");
+  };
+
+  console.log(selectedAnswer);
+
   const handleSubmit = (ev) => {
     ev.preventDefault();
     checkAnswer();
@@ -129,7 +167,7 @@ const Game = () => {
       <Modal
         show={modalState.modalShow}
         backdrop={modalState.modalBackdrop}
-        onHide={() => dispatch({ type: ACTIONS.HIDE_MODAL })}
+        onHide={handleHideModal}
         content={modalState.modalContent}
         closeModal={modalState.isModalClosable}
         modalAdditionalClass={modalState.modalAdditionalClass}
@@ -138,43 +176,32 @@ const Game = () => {
           navigate("/");
         }}
       />
-      <Timer
-        timerValue={5}
-        handleTimeExpired={() => dispatch({ type: ACTIONS.TIME_EXPIRED })}
-      />
-      <LifelineBar
-        className=""
-        lifelineClassName=""
-        onCallFriendLifeline={() =>
-          dispatch({
-            type: ACTIONS.CALL_FRIEND_LIFELINE,
-            payload: { correctAnswer: questions[questionNo].correctAnswer },
-          })
-        }
-        onFiftyFifty={handleFiftyFifty}
-        onAskAudienceLifeline={() =>
-          dispatch({
-            type: ACTIONS.ASK_THE_AUDIENCE_LIFELINE,
-            payload: {
-              answers: currentQuestionAnswers,
-              correctAnswer: questions[questionNo].correctAnswer,
-            },
-          })
-        }
-      />
       {questions && (
-        <section
-          className={`d-flex align-items-center justify-content-center ${styles["game-section"]}`}
-        >
-          <Form
-            data={currentQuestionAnswers}
-            label={`${questionNo + 1}. ${questions[questionNo].question}`}
-            type={"questions"}
-            onGetSelectedOption={handleSelectedAnswer}
-            onSubmit={handleSubmit}
+        <>
+          <Timer
+            timerValue={20}
+            handleTimeExpired={handleTimeExpired}
+            timerIsReset={timerIsReset}
+            timerIsPaused={timerIsPaused}
           />
-          <Scoreboard questionNo={questionNo} />
-        </section>
+          <LifelineBar
+            onCallFriendLifeline={handleCallAFriend}
+            onFiftyFifty={handleFiftyFifty}
+            onAskAudienceLifeline={handleAskTheAudience}
+          />
+          <section
+            className={`d-flex align-items-center justify-content-center ${styles["game-section"]}`}
+          >
+            <Form
+              data={currentQuestionAnswers}
+              label={`${questionNo + 1}. ${questions[questionNo].question}`}
+              type={"questions"}
+              onGetSelectedOption={handleSelectedAnswer}
+              onSubmit={handleSubmit}
+            />
+            <Scoreboard questionNo={questionNo} />
+          </section>
+        </>
       )}
     </main>
   );

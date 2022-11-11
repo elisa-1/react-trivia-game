@@ -4,6 +4,7 @@ export const ACTIONS = {
   SHOW_MODAL: "show-modal",
   HIDE_MODAL: "hide-modal",
   INCORRECT_ANSWER: "incorrect-answer",
+  NO_ANSWER_SELECTED: "no-answer-selected",
   CALL_FRIEND_LIFELINE: "call-friend-lifeline",
   ASK_THE_AUDIENCE_LIFELINE: "ask-the-audience-lifeline",
   TIME_EXPIRED: "time-expired",
@@ -24,6 +25,13 @@ export const reducer = (state, action) => {
         isModalClosable: false,
         modalAdditionalClass: "game-over",
       };
+    case ACTIONS.NO_ANSWER_SELECTED:
+      return {
+        modalShow: true,
+        modalContent: UI_TEXT.noAnswerSelected,
+        modalBackdrop: true,
+        isModalClosable: true
+      }
     case ACTIONS.GAME_WON:
       return {
         modalShow: true,

@@ -115,6 +115,7 @@ const Game = () => {
     copiedAnswers[arrIndexIncorrectAnswers[1]] = "";
     if (!copiedAnswers.includes(selectedAnswer)) setSelectedAnswer("");
     setCurrentQuestionAnswers(copiedAnswers);
+    localStorage.setItem("currentAnswers", JSON.stringify(copiedAnswers));
   };
 
   const handleSubmit = (ev) => {

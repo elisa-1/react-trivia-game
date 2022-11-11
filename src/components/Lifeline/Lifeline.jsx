@@ -4,20 +4,33 @@ import styles from "./Lifeline.module.css";
 const Lifeline = (props) => {
   const [isClickable, setIsClickable] = useState(true);
 
-  const handleClick = () => {
+  const handleClick = (type) => {
     props.onClick();
     setIsClickable(false);
+    localStorage.setItem(`${type}`, "clicked");
   };
+
+  const disabledState =
+    localStorage.getItem(props.type) === "clicked"
+      ? true
+      : isClickable
+      ? false
+      : true;
+
+  console.log(
+    localStorage.getItem(props.type),
+    typeof localStorage.getItem(props.type)
+  );
 
   const btnClasses = `d-flex justify-content-center align-items-center text-white ${
     props.className
-  } ${styles.lifeline} ${isClickable ? "" : styles['disabled-button']}`;
+  } ${styles.lifeline} ${!disabledState ? "" : styles["disabled-button"]}`;
 
   return (
     <button
       className={btnClasses}
-      onClick={handleClick}
-      disabled={isClickable ? false : true}
+      onClick={() => handleClick(props.type)}
+      disabled={disabledState}
     >
       {props.children}
     </button>

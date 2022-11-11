@@ -1,7 +1,8 @@
 import { useState, useEffect, useReducer } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getQuestions } from "../services/api";
-import { randomSort } from "../services/utils";
+import { listLetters } from "../services/constants";
+import { randomSort, sortQuestionsByDifficulty } from "../services/utils";
 import { ACTIONS, reducer } from "../components/modalReducer";
 import Form from "../components/Form/Form";
 import Modal from "../components/UI/Modal";
@@ -41,7 +42,7 @@ const Game = () => {
         try {
           setQuestions((prev) => {
             if (!prev) {
-              return res.data;
+              return sortQuestionsByDifficulty(res.data);
             } else {
               return prev;
             }
@@ -67,8 +68,11 @@ const Game = () => {
           ...questions[questionNo].incorrectAnswers,
           `${questions[questionNo].correctAnswer} ***`,
         ]);
-        setCurrentQuestionAnswers(answers);
-        localStorage.setItem("currentAnswers", JSON.stringify(answers));
+        const finalAnswers = answers.map(
+          (answer, index) => (answer = `${listLetters[index]}. ${answer}`)
+        );
+        setCurrentQuestionAnswers(finalAnswers);
+        localStorage.setItem("currentAnswers", JSON.stringify(finalAnswers));
       }
       localStorage.setItem("questionNo", questionNo);
     }

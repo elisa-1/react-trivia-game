@@ -5,6 +5,8 @@ const UI_TEXT = {
   callFriendMessage: "I am not sure, but I think that the correct answer is: "
 };
 
+const listLetters = ['A', 'B', 'C', 'D'];
+
 const questionValues = [
   { value: 100, type: 'regular' },
   { value: 200, type: 'regular' },
@@ -23,4 +25,4 @@ const questionValues = [
   { value: 1000000, type: 'safe' }
 ];
 
-export { UI_TEXT, questionValues };
+export { UI_TEXT, listLetters, questionValues };

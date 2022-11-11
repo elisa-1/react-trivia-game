@@ -42,8 +42,12 @@ export const reducer = (state, action) => {
         modalContent: UI_TEXT.askTheAudienceMessage,
         modalBackdrop: true,
         modalAdditionalClass: "ask-audience",
-        modalAskAudience: true
-      }
+        modalAskAudience: {
+          state: true,
+          correctAnswer: action.payload.correctAnswer,
+          answers: action.payload.answers
+        },
+      };
     default:
       return state;
   }

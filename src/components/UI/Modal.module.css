@@ -6,6 +6,10 @@
   font-size: 1.5rem;
 }
 
+.modal-body div {
+  font-size: 1.2rem;
+}
+
 .modal-backdrop {
   background: var(--custom-bs-backdrop);
   background-position: right bottom;
@@ -40,6 +44,10 @@
 @media (max-width: 900px) {
   .modal-content {
     font-size: 1rem;
+  }
+
+  .modal-body div {
+    font-size: 0.8rem;
   }
 
   .modal-backdrop {

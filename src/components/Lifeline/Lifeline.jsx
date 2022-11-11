@@ -17,11 +17,6 @@ const Lifeline = (props) => {
       ? false
       : true;
 
-  console.log(
-    localStorage.getItem(props.type),
-    typeof localStorage.getItem(props.type)
-  );
-
   const btnClasses = `d-flex justify-content-center align-items-center text-white ${
     props.className
   } ${styles.lifeline} ${!disabledState ? "" : styles["disabled-button"]}`;

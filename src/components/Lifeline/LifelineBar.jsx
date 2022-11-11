@@ -1,5 +1,4 @@
 import Lifeline from "./Lifeline";
-import styles from "./LifelineBar.module.css";
 import { IoIosPeople, IoIosCall } from "react-icons/io";
 
 const LIFELINE_TYPES = {
@@ -11,7 +10,7 @@ const LIFELINE_TYPES = {
 const LifelineBar = (props) => {
   return (
     <div
-      className={`d-flex gap-3 ${props.className} ${styles["lifeline-bar"]}`}
+      className={`d-flex gap-3 ${props.className}`}
     >
       <Lifeline
         className={`fw-bold ${props.lifelineClassName}`}

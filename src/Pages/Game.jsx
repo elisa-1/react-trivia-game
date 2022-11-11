@@ -28,7 +28,7 @@ const Game = () => {
     modalContent: "",
     modalBackdrop: true,
     modalAdditionalClass: "",
-    modalAskAudience: false
+    modalAskAudience: {},
   });
 
   const { category } = useParams();
@@ -152,7 +152,13 @@ const Game = () => {
         }
         onFiftyFifty={handleFiftyFifty}
         onAskAudienceLifeline={() =>
-          dispatch({ type: ACTIONS.ASK_THE_AUDIENCE_LIFELINE })
+          dispatch({
+            type: ACTIONS.ASK_THE_AUDIENCE_LIFELINE,
+            payload: {
+              answers: currentQuestionAnswers,
+              correctAnswer: questions[questionNo].correctAnswer,
+            },
+          })
         }
       />
       {questions && (

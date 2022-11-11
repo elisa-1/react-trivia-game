@@ -22,12 +22,12 @@ const Game = () => {
   );
   const [currentQuestionAnswers, setCurrentQuestionAnswers] = useState([]);
   const [selectedAnswer, setSelectedAnswer] = useState("");
-  const [isGameOver, setIsGameOver] = useState(false);
   const [modalState, dispatch] = useReducer(reducer, {
     modalShow: false,
     modalContent: "",
     modalBackdrop: true,
     modalAdditionalClass: "",
+    isModalClosable: true,
     modalAskAudience: {},
   });
 
@@ -90,7 +90,6 @@ const Game = () => {
 
     if (!isCorrectAnswerSelected) {
       dispatch({ type: ACTIONS.INCORRECT_ANSWER });
-      setIsGameOver(true);
     }
     if (isCorrectAnswerSelected && questionNo < questions.length - 1) {
       setQuestionNo((prevNo) => prevNo + 1);
@@ -98,7 +97,6 @@ const Game = () => {
     }
     if (isCorrectAnswerSelected && questionNo === questions.length - 1) {
       dispatch({ type: ACTIONS.GAME_WON });
-      setIsGameOver(true);
     }
   };
 
@@ -133,14 +131,17 @@ const Game = () => {
         backdrop={modalState.modalBackdrop}
         onHide={() => dispatch({ type: ACTIONS.HIDE_MODAL })}
         content={modalState.modalContent}
-        closeModal={!isGameOver}
+        closeModal={modalState.isModalClosable}
         modalAdditionalClass={modalState.modalAdditionalClass}
         modalAskAudience={modalState.modalAskAudience}
         goToMainMenu={() => {
           navigate("/");
         }}
       />
-      <Timer />
+      <Timer
+        timerValue={5}
+        handleTimeExpired={() => dispatch({ type: ACTIONS.TIME_EXPIRED })}
+      />
       <LifelineBar
         className=""
         lifelineClassName=""

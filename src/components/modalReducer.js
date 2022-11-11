@@ -6,6 +6,7 @@ export const ACTIONS = {
   INCORRECT_ANSWER: "incorrect-answer",
   CALL_FRIEND_LIFELINE: "call-friend-lifeline",
   ASK_THE_AUDIENCE_LIFELINE: "ask-the-audience-lifeline",
+  TIME_EXPIRED: "time-expired",
   GAME_WON: "game-won",
 };
 
@@ -20,13 +21,15 @@ export const reducer = (state, action) => {
         modalShow: true,
         modalContent: UI_TEXT.incorrectAnswer,
         modalBackdrop: "static",
-        modalAdditionalClass: "incorrect-answer",
+        isModalClosable: false,
+        modalAdditionalClass: "game-over",
       };
     case ACTIONS.GAME_WON:
       return {
         modalShow: true,
         modalContent: UI_TEXT.gameWon,
         modalBackdrop: "static",
+        isModalClosable: false,
         modalAdditionalClass: "game-won",
       };
     case ACTIONS.CALL_FRIEND_LIFELINE:
@@ -34,6 +37,7 @@ export const reducer = (state, action) => {
         modalShow: true,
         modalContent: UI_TEXT.callFriendMessage + action.payload.correctAnswer,
         modalBackdrop: true,
+        isModalClosable: true,
         modalAdditionalClass: "call-friend",
       };
     case ACTIONS.ASK_THE_AUDIENCE_LIFELINE:
@@ -41,12 +45,21 @@ export const reducer = (state, action) => {
         modalShow: true,
         modalContent: UI_TEXT.askTheAudienceMessage,
         modalBackdrop: true,
+        isModalClosable: true,
         modalAdditionalClass: "ask-audience",
         modalAskAudience: {
           state: true,
           correctAnswer: action.payload.correctAnswer,
-          answers: action.payload.answers
+          answers: action.payload.answers,
         },
+      };
+    case ACTIONS.TIME_EXPIRED:
+      return {
+        modalShow: true,
+        modalContent: UI_TEXT.timeExpired,
+        modalBackdrop: "static",
+        isModalClosable: false,
+        modalAdditionalClass: "game-over",
       };
     default:
       return state;

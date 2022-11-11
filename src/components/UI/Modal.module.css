@@ -22,7 +22,7 @@
   background-image: url("../../assets/png/game-won-icon.png");
 }
 
-.incorrect-answer {
+.game-over {
   background-image: url("../../assets/png/game-over-icon.png");
 }
 

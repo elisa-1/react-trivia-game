@@ -1,2 +1,5 @@
 .timer {
+  width: 10rem;
+  -webkit-box-shadow: inset 5px 5px 20px 20px var(--secondary-lighter), 5px 5px 20px 20px var(--secondary-lighter);
+  box-shadow: inset 5px 5px 20px 20px var(--secondary-lighter), 5px 5px 20px 20px var(--secondary-lighter);
 }

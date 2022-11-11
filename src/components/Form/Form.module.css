@@ -1,4 +1,5 @@
 .form {
+  min-height: auto;
   height: 100%;
   max-width: 40vw;
   z-index: 50;

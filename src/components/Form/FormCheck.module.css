@@ -2,7 +2,6 @@
   padding: 0;
   width: auto;
   font-size: 1rem;
-  height: 2.3rem;
 }
 
 .form-check label {
@@ -10,7 +9,7 @@
   text-align: justify;
   width: 100%;
   min-height: 2rem;
-  height: stretch;
+  height: auto;
   cursor: pointer;
   background: var(--secondary);
   background: var(--secondary-gradient-linear);
@@ -31,6 +30,5 @@
 @media (max-width: 650px) {
   .form-check {
     font-size: 0.8rem;
-    height: 2rem;
   }
 }

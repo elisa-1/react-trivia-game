@@ -1,12 +1,16 @@
 .form {
   min-height: auto;
   height: 100%;
-  max-width: 40vw;
   z-index: 50;
+  min-width: 20vw;
+  width: 35vw;
+}
+
+.form:is(.categories) {
+  width: 20vw;
 }
 
 .form-label {
-  min-width: 20vw;
   background: var(--secondary);
   background: var(--secondary-gradient-linear);
   padding: 2rem;
@@ -16,14 +20,14 @@
 }
 
 @media (max-width: 768px) {
-  .form {
-    max-width: 80vw;
+  .form,
+  .form:is(.categories) {
+    width: 80vw;
   }
 }
 
 @media (max-width: 650px) {
   .form-label {
-    min-width: 80vw;
     padding: 1rem;
     font-size: 0.9rem;
   }

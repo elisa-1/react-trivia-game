@@ -22,7 +22,7 @@ const Form = (props) => {
 
   return (
     <BSForm
-      className={`d-flex justify-content-center flex-column text-white ${styles.form}`}
+      className={`d-flex justify-content-center flex-column text-white ${styles.form} ${styles[props.type]}`}
       onSubmit={props.onSubmit}
     >
       <BSForm.Label

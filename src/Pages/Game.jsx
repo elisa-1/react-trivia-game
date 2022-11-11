@@ -84,24 +84,37 @@ const Game = () => {
 
   const checkAnswer = () => {
     const currentCorrectAnswer = questions[questionNo].correctAnswer;
-    if (!selectedAnswer.includes(currentCorrectAnswer)) {
+    const isCorrectAnswerSelected =
+      selectedAnswer.includes(currentCorrectAnswer);
+
+    if (!isCorrectAnswerSelected) {
       dispatch({ type: ACTIONS.INCORRECT_ANSWER });
       setIsGameOver(true);
     }
-    if (
-      selectedAnswer.includes(currentCorrectAnswer) &&
-      questionNo < questions.length - 1
-    ) {
+    if (isCorrectAnswerSelected && questionNo < questions.length - 1) {
       setQuestionNo((prevNo) => prevNo + 1);
       localStorage.removeItem("currentAnswers");
     }
-    if (
-      selectedAnswer.includes(currentCorrectAnswer) &&
-      questionNo === questions.length - 1
-    ) {
+    if (isCorrectAnswerSelected && questionNo === questions.length - 1) {
       dispatch({ type: ACTIONS.GAME_WON });
       setIsGameOver(true);
     }
+  };
+
+  const handleFiftyFifty = () => {
+    let copiedAnswers = [...currentQuestionAnswers];
+    let arrIndexIncorrectAnswers = [];
+
+    for (let answer of [...questions[questionNo].incorrectAnswers]) {
+      arrIndexIncorrectAnswers.push(
+        copiedAnswers.findIndex((elem) => elem.includes(answer))
+      );
+    }
+    randomSort(arrIndexIncorrectAnswers);
+    copiedAnswers[arrIndexIncorrectAnswers[0]] = "";
+    copiedAnswers[arrIndexIncorrectAnswers[1]] = "";
+    if (!copiedAnswers.includes(selectedAnswer)) setSelectedAnswer("");
+    setCurrentQuestionAnswers(copiedAnswers);
   };
 
   const handleSubmit = (ev) => {
@@ -134,6 +147,7 @@ const Game = () => {
             payload: { correctAnswer: questions[questionNo].correctAnswer },
           })
         }
+        onFiftyFifty={handleFiftyFifty}
       />
       {questions && (
         <section

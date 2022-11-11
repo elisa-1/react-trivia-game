@@ -11,7 +11,8 @@ const FormCheck = (props) => {
       name={props.type}
       defaultChecked={props.defaultChecked}
       onClick={props.onClick}
-    ></BSForm.Check>
+      disabled={props.children === " " ? true : false}
+    />
   );
 };
 

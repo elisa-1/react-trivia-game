@@ -10,7 +10,7 @@ const Form = (props) => {
 
   const formCheckList = props.data.map((item, index) => (
     <FormCheck
-      key={item.toLowerCase().replaceAll(" ", "-")}
+      key={`${item.toLowerCase().replaceAll(" ", "-")}-${index}`}
       id={item.toLowerCase().replaceAll(" ", "-")}
       defaultChecked={props.type === "categories" && index === 0 ? true : false}
       type={props.type}

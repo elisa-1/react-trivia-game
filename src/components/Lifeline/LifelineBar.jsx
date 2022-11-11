@@ -9,13 +9,17 @@ const LifelineBar = (props) => {
     >
       <Lifeline
         className={`fw-bold ${props.lifelineClassName}`}
+        onClick={props.onFiftyFifty}
       >
         50:50
       </Lifeline>
       <Lifeline className={props.lifelineClassName}>
         <IoIosPeople className="h-75 w-75" />
       </Lifeline>
-      <Lifeline onClick={props.onCallFriendLifeline} className={props.lifelineClassName}>
+      <Lifeline
+        onClick={props.onCallFriendLifeline}
+        className={props.lifelineClassName}
+      >
         <IoIosCall className="h-75 w-75" />
       </Lifeline>
     </div>

@@ -15,7 +15,7 @@ const LifelineBar = (props) => {
       <Lifeline className={props.lifelineClassName}>
         <IoIosPeople className="h-75 w-75" />
       </Lifeline>
-      <Lifeline className={props.lifelineClassName}>
+      <Lifeline onClick={props.onCallFriendLifeline} className={props.lifelineClassName}>
         <IoIosCall className="h-75 w-75" />
       </Lifeline>
     </div>

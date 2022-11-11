@@ -10,3 +10,8 @@
   -webkit-user-select: none;
   user-select: none;
 }
+
+.disabled-button {
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+}

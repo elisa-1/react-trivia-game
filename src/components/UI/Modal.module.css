@@ -22,6 +22,10 @@
   background-image: url("../../assets/png/game-over-icon.png");
 }
 
+.call-friend {
+  background-image: url("../../assets/png/call-friend-icon.png")
+}
+
 @media (max-width: 1300px) {
   .modal-backdrop {
     background-size: 30vh;

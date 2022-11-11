@@ -5,11 +5,14 @@ import styles from "./Modal.module.css";
 const Modal = (props) => {
   return (
     <BSModal
+      onHide={props.onHide}
       show={props.show}
       centered
       backdrop={props.backdrop}
       contentClassName={`${styles["modal-content"]}`}
-      backdropClassName={`${styles["modal-backdrop"]} ${styles[props.modalAdditionalClass]}`}
+      backdropClassName={`${styles["modal-backdrop"]} ${
+        styles[props.modalAdditionalClass]
+      }`}
     >
       <BSModal.Header className="border-0"></BSModal.Header>
       <BSModal.Body className={`text-center ${styles["modal-body"]}`}>

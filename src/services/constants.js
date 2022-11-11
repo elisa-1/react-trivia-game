@@ -1,7 +1,8 @@
 const UI_TEXT = {
   selectCategoryMessage: "Please select a category: ",
   incorrectAnswer: "Sorry. The answer was incorrect.",
-  gameWon: "Congratulations. You won 1,000,000$!"
+  gameWon: "Congratulations. You won 1,000,000$!",
+  callFriendMessage: "I am not sure, but I think that the correct answer is: "
 };
 
 const questionValues = [

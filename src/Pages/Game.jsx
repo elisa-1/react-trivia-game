@@ -121,7 +121,16 @@ const Game = () => {
         }}
       />
       <Timer />
-      <LifelineBar className="" lifelineClassName="" />
+      <LifelineBar
+        className=""
+        lifelineClassName=""
+        onCallFriendLifeline={() =>
+          dispatch({
+            type: ACTIONS.CALL_FRIEND_LIFELINE,
+            payload: { correctAnswer: questions[questionNo].correctAnswer },
+          })
+        }
+      />
       {questions && (
         <section
           className={`d-flex align-items-center justify-content-center ${styles["game-section"]}`}

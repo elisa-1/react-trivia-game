@@ -4,6 +4,7 @@ export const ACTIONS = {
   SHOW_MODAL: "show-modal",
   HIDE_MODAL: "hide-modal",
   INCORRECT_ANSWER: "incorrect-answer",
+  CALL_FRIEND_LIFELINE: "call-friend-lifeline",
   GAME_WON: "game-won",
 };
 
@@ -18,14 +19,21 @@ export const reducer = (state, action) => {
         modalShow: true,
         modalContent: UI_TEXT.incorrectAnswer,
         modalBackdrop: "static",
-        modalAdditionalClass: "incorrect-answer"
+        modalAdditionalClass: "incorrect-answer",
       };
     case ACTIONS.GAME_WON:
       return {
         modalShow: true,
         modalContent: UI_TEXT.gameWon,
         modalBackdrop: "static",
-        modalAdditionalClass: "game-won"
+        modalAdditionalClass: "game-won",
+      };
+    case ACTIONS.CALL_FRIEND_LIFELINE:
+      return {
+        modalShow: true,
+        modalContent: UI_TEXT.callFriendMessage + action.payload.correctAnswer,
+        modalBackdrop: true,
+        modalAdditionalClass: "call-friend",
       };
     default:
       return state;

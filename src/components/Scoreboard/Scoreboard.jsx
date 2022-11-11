@@ -4,7 +4,7 @@ import styles from "./Scoreboard.module.css";
 const Scoreboard = (props) => {
   return (
     <ul
-      className={`pt-3 pb-3 list-unstyled d-flex flex-column-reverse justify-content-center fw-bold ${styles.scoreboard}`}
+      className={`pt-3 pb-3 list-unstyled d-flex flex-column-reverse justify-content-center fw-bold m-0 ${styles.scoreboard}`}
     >
       {questionValues.map((question, index) => {
         return (

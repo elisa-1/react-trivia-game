@@ -9,8 +9,7 @@
     color: var(--orange);
     border: 1px solid white;
     background: var(--secondary);
-    -webkit-box-shadow: inset 5px 5px 60px 60px var(--secondary-lighter);
-    box-shadow: inset 5px 5px 60px 60px var(--secondary-lighter);
+    background: var(--secondary-gradient-radial);
   }
 
   .safe-question {

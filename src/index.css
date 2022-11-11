@@ -15,6 +15,12 @@
     var(--secondary-lighter)
   );
 
+  --secondary-gradient-radial: radial-gradient(
+    var(--secondary),
+    var(--secondary),
+    var(--secondary-lighter)
+  );
+
   --orange: #d29f12;
   --dark-orange: #cc5500;
 }

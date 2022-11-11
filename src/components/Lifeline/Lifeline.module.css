@@ -1,0 +1,10 @@
+.lifeline {
+  border: 1px solid white;
+  border-radius: 50%;
+  height: 3rem;
+  width: 5rem;
+  background: var(--secondary);
+  background: var(--secondary-gradient-linear);
+  -webkit-box-shadow: 5px 5px 20px 20px var(--secondary-lighter);
+  box-shadow: 5px 5px 20px 20px var(--secondary-lighter);
+}

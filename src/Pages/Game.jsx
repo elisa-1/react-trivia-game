@@ -6,6 +6,8 @@ import { ACTIONS, reducer } from "../components/modalReducer";
 import Form from "../components/Form/Form";
 import Modal from "../components/UI/Modal";
 import Scoreboard from "../components/Scoreboard/Scoreboard";
+import LifelineBar from "../components/Lifeline/LifelineBar";
+import Timer from "../components/Timer/Timer";
 import styles from "./Game.module.css";
 
 const Game = () => {
@@ -105,7 +107,7 @@ const Game = () => {
 
   return (
     <main
-      className={`d-flex justify-content-center align-items-center ${styles["main-game"]}`}
+      className={`d-flex flex-column justify-content-center align-items-center gap-3 ${styles["main-game"]}`}
     >
       <Modal
         show={modalState.modalShow}
@@ -118,8 +120,12 @@ const Game = () => {
           navigate("/");
         }}
       />
+      <Timer />
+      <LifelineBar className="" lifelineClassName="" />
       {questions && (
-        <>
+        <section
+          className={`d-flex align-items-center justify-content-center ${styles["game-section"]}`}
+        >
           <Form
             data={currentQuestionAnswers}
             label={`${questionNo + 1}. ${questions[questionNo].question}`}
@@ -128,7 +134,7 @@ const Game = () => {
             onSubmit={handleSubmit}
           />
           <Scoreboard questionNo={questionNo} />
-        </>
+        </section>
       )}
     </main>
   );

@@ -21,6 +21,7 @@ const LifelineBar = (props) => {
         50:50
       </Lifeline>
       <Lifeline
+        onClick={props.onAskAudienceLifeline}
         className={props.lifelineClassName}
         type={LIFELINE_TYPES.ASK_THE_AUTDIENCE}
       >

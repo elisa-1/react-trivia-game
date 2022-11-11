@@ -23,7 +23,11 @@
 }
 
 .call-friend {
-  background-image: url("../../assets/png/call-friend-icon.png")
+  background-image: url("../../assets/png/call-friend-icon.png");
+}
+
+.ask-audience {
+  background-image: url("../../assets/png/ask-audience-icon.png");
 }
 
 @media (max-width: 1300px) {

@@ -28,6 +28,7 @@ const Game = () => {
     modalContent: "",
     modalBackdrop: true,
     modalAdditionalClass: "",
+    modalAskAudience: false
   });
 
   const { category } = useParams();
@@ -134,6 +135,7 @@ const Game = () => {
         content={modalState.modalContent}
         closeModal={!isGameOver}
         modalAdditionalClass={modalState.modalAdditionalClass}
+        modalAskAudience={modalState.modalAskAudience}
         goToMainMenu={() => {
           navigate("/");
         }}
@@ -149,6 +151,9 @@ const Game = () => {
           })
         }
         onFiftyFifty={handleFiftyFifty}
+        onAskAudienceLifeline={() =>
+          dispatch({ type: ACTIONS.ASK_THE_AUDIENCE_LIFELINE })
+        }
       />
       {questions && (
         <section

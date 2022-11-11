@@ -5,6 +5,7 @@ export const ACTIONS = {
   HIDE_MODAL: "hide-modal",
   INCORRECT_ANSWER: "incorrect-answer",
   CALL_FRIEND_LIFELINE: "call-friend-lifeline",
+  ASK_THE_AUDIENCE_LIFELINE: "ask-the-audience-lifeline",
   GAME_WON: "game-won",
 };
 
@@ -35,6 +36,14 @@ export const reducer = (state, action) => {
         modalBackdrop: true,
         modalAdditionalClass: "call-friend",
       };
+    case ACTIONS.ASK_THE_AUDIENCE_LIFELINE:
+      return {
+        modalShow: true,
+        modalContent: UI_TEXT.askTheAudienceMessage,
+        modalBackdrop: true,
+        modalAdditionalClass: "ask-audience",
+        modalAskAudience: true
+      }
     default:
       return state;
   }

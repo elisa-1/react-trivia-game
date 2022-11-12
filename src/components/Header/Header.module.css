@@ -1,0 +1,7 @@
+.header {
+  color: var(--main-darker);
+}
+
+.header * {
+  color: inherit;
+}

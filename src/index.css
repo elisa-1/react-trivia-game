@@ -29,3 +29,9 @@ body {
   margin: 0;
   font-family: "Fira Sans", sans-serif;
 }
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}

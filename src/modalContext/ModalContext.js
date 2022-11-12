@@ -49,6 +49,12 @@ export const ModalProvider = ({ children }) => {
     dispatch({ type: ACTIONS.GAME_WON });
   };
 
+  const exitForAuthHandler = () => {
+    if (localStorage.getItem("gameStarted") !== "true") {
+      dispatch({ type: ACTIONS.EXIT_FOR_AUTH });
+    }
+  };
+
   const value = {
     modalShow: modalState.modalShow,
     modalContent: modalState.modalContent,
@@ -65,6 +71,7 @@ export const ModalProvider = ({ children }) => {
     noAnswerSelectedHandler,
     incorrectAnswerHandler,
     gameWonHandler,
+    exitForAuthHandler,
   };
 
   return (

@@ -103,6 +103,6 @@ export const reducer = (state, action) => {
         isExitModal: true,
       };
     default:
-      throw new Error(`No case for type ${action.type} found.`)
+      throw new Error(`No case for type ${action.type} found.`);
   }
 };

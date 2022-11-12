@@ -12,7 +12,7 @@ const UI_TEXT = {
   exitMessage:
     "Are you sure you want to leave the game? If you leave now, you only take $",
   exitMessageAuth:
-    "Are you sure you want to leave the game? You will lose your progress.",
+    "Are you sure you want to leave the game? You will lose this game's progress.",
 };
 
 const listLetters = ["A", "B", "C", "D"];

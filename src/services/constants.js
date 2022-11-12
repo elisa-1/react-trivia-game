@@ -3,7 +3,7 @@ const UI_TEXT = {
   incorrectAnswer: "Sorry. The answer was incorrect. Game over.",
   noAnswerSelected: "Please select an answer.",
   gameWon: "Congratulations. You won 1,000,000$!",
-  callFriendMessage: "I am not sure, but I think that the correct answer is: ",
+  callFriendMessage: "Friend: I am not sure, but I think that the correct answer is: ",
   askTheAudienceMessage: "See below what our audience thinks: ",
   timeExpired: "Sorry. Your time expired. Game over.",
   exitButtonMessage: "GET $",
@@ -20,6 +20,8 @@ const UI_TEXT = {
     emailText: "We'll never share your email with anyone else.",
     passwordText:
       "Passwords must have at least 8 characters and contain at least two of the following: uppercase letters, lowercase letters, numbers, and symbols.",
+    suggestSignIn: "Already a member? Sign In.",
+    suggestSignUp: "Don't have an account yet? Sign Up",
   },
 
   modalButtons: {
@@ -27,8 +29,8 @@ const UI_TEXT = {
     returnToMainMenu: "Return to Main Menu",
     leaveGame: "Leave Game",
     goToSignIn: "Sign In",
-    goToSignUp: "Sign Up"
-  }
+    goToSignUp: "Sign Up",
+  },
 };
 
 const listLetters = ["A", "B", "C", "D"];

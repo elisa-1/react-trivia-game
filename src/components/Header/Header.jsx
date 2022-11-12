@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
@@ -7,8 +8,11 @@ import Modal from "../UI/Modal";
 import styles from "./Header.module.css";
 
 const Header = () => {
+  const [navigateTo, setNavigateTo] = useState("");
   const storedGameStartedFlag = localStorage.getItem("gameStarted");
   const navigate = useNavigate();
+
+  console.log(navigateTo);
 
   const {
     modalShow,
@@ -19,6 +23,7 @@ const Header = () => {
     exitForAuthHandler,
     modalAdditionalClass,
     hideModalHandler,
+    navigatesToMenu,
   } = useModal();
 
   const navLinks =
@@ -36,13 +41,32 @@ const Header = () => {
       </>
     ) : (
       <>
-        <Link className="nav-link" onClick={exitForAuthHandler}>
+        <Link
+          className="nav-link"
+          onClick={() => {
+            exitForAuthHandler();
+            setNavigateTo("/");
+          }}
+        >
           Home
         </Link>
-        <Link className="nav-link" onClick={exitForAuthHandler}>
+        <Link
+          className="nav-link"
+          onClick={() => {
+            exitForAuthHandler();
+            setNavigateTo("/signin");
+          }}
+        >
           Sign In
         </Link>
-        <Link className="nav-link" onClick={exitForAuthHandler}>
+        <Link
+          className="nav-link"
+          onClick={() => {
+            exitForAuthHandler();
+            setNavigateTo("/signup");
+          }}
+        >
+          {" "}
           Sign Up
         </Link>
       </>
@@ -56,15 +80,19 @@ const Header = () => {
         content={modalContent}
         closeModal={isModalClosable}
         isExitModal={isExitModal}
+        navigatesToMenu={navigatesToMenu}
         onHide={hideModalHandler}
         modalAdditionalClass={modalAdditionalClass}
+        navigateTo={navigateTo}
         goToMainMenu={() => {
           navigate("/");
         }}
       />
       <Navbar expand="lg" className={`${styles.header}`}>
         <Container>
-          <Navbar.Brand className={styles.brand}>React Millionaire Game</Navbar.Brand>
+          <Navbar.Brand className={styles.brand}>
+            React Millionaire Game
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">{navLinks}</Nav>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import useModal from "../modalContext/ModalContext";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { getQuestions } from "../services/api";
 import { listLetters } from "../services/constants";
 import { randomSort, sortQuestionsByDifficulty } from "../services/utils";
@@ -46,7 +46,6 @@ const Game = () => {
   const [timerIsPaused, setTimerIsPaused] = useState(false);
 
   const { category } = useParams();
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (storedQuestions && storedQuestions !== "undefined") {
@@ -180,9 +179,6 @@ const Game = () => {
         isExitModal={isExitModal}
         modalAdditionalClass={modalAdditionalClass}
         modalAskAudience={modalAskAudience}
-        goToMainMenu={() => {
-          navigate("/");
-        }}
       />
       {questions ? (
         <>

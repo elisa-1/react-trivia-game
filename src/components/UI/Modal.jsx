@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import useModal from "../../modalContext/ModalContext";
 import { UI_TEXT } from "../../services/constants";
 import { Modal as BSModal } from "react-bootstrap";
@@ -6,10 +7,19 @@ import Button from "./Button";
 import styles from "./Modal.module.css";
 
 const Modal = (props) => {
+  const navigate = useNavigate();
+  const { navigateTo } = props;
   const { hideModalHandler } = useModal();
 
-  const returnToMainMenuHandler = () => {
-    props.goToMainMenu();
+  const returnToMainMenu = () => {
+    navigate("/");
+  };
+
+  const clickHandler = (navigateTo) => {
+    if (navigateTo === "/" || !navigateTo) returnToMainMenu();
+    else {
+      navigate(navigateTo);
+    }
     hideModalHandler();
   };
 
@@ -36,7 +46,7 @@ const Modal = (props) => {
       </BSModal.Body>
       <BSModal.Footer className={`m-0 border-0 d-flex justify-content-center`}>
         {props.isExitModal && (
-          <Button onClick={returnToMainMenuHandler}>
+          <Button onClick={() => clickHandler(navigateTo)}>
             {UI_TEXT.modalButtons.leaveGame}
           </Button>
         )}
@@ -44,7 +54,7 @@ const Modal = (props) => {
           <Button onClick={props.onHide}>{UI_TEXT.modalButtons.close}</Button>
         )}
         {!props.closeModal && (
-          <Button onClick={returnToMainMenuHandler}>
+          <Button onClick={() => clickHandler(navigateTo)}>
             {UI_TEXT.modalButtons.returnToMainMenu}
           </Button>
         )}

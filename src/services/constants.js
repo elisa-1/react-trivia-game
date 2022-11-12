@@ -6,6 +6,9 @@ const UI_TEXT = {
   callFriendMessage: "I am not sure, but I think that the correct answer is: ",
   askTheAudienceMessage: "See below what our audience thinks: ",
   timeExpired: "Sorry. Your time expired. Game over.",
+  exitButtonMessage: "GET $",
+  exitMessageZero: "Are you sure you want to leave the game? If you leave now, you will not get any money.",
+  exitMessage: "Are you sure you want to leave the game? If you leave now, you only take $"
 };
 
 const listLetters = ["A", "B", "C", "D"];

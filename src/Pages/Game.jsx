@@ -9,6 +9,7 @@ import Modal from "../components/UI/Modal";
 import Scoreboard from "../components/Scoreboard/Scoreboard";
 import LifelineBar from "../components/Lifeline/LifelineBar";
 import Timer from "../components/Timer/Timer";
+import Exit from "../components/Exit/Exit";
 import styles from "./Game.module.css";
 
 const Game = () => {
@@ -131,6 +132,11 @@ const Game = () => {
     setTimerIsPaused(false);
   };
 
+  const handleExit = (value) => {
+    dispatch({ type: ACTIONS.EXIT_GAME, payload: { value: value } });
+    setTimerIsPaused(true);
+  };
+
   const checkAnswer = () => {
     const currentCorrectAnswer = questions[questionNo].correctAnswer;
     const isCorrectAnswerSelected =
@@ -152,8 +158,6 @@ const Game = () => {
     }
     setSelectedAnswer("");
   };
-
-  console.log(selectedAnswer);
 
   const handleSubmit = (ev) => {
     ev.preventDefault();
@@ -178,6 +182,7 @@ const Game = () => {
       />
       {questions && (
         <>
+          <Exit questionNo={questionNo} handleExit={handleExit} />
           <Timer
             timerValue={20}
             handleTimeExpired={handleTimeExpired}

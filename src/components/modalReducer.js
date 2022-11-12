@@ -9,6 +9,7 @@ export const ACTIONS = {
   ASK_THE_AUDIENCE_LIFELINE: "ask-the-audience-lifeline",
   TIME_EXPIRED: "time-expired",
   GAME_WON: "game-won",
+  EXIT_GAME: "exit-game",
 };
 
 export const reducer = (state, action) => {
@@ -30,8 +31,8 @@ export const reducer = (state, action) => {
         modalShow: true,
         modalContent: UI_TEXT.noAnswerSelected,
         modalBackdrop: true,
-        isModalClosable: true
-      }
+        isModalClosable: true,
+      };
     case ACTIONS.GAME_WON:
       return {
         modalShow: true,
@@ -68,6 +69,17 @@ export const reducer = (state, action) => {
         modalBackdrop: "static",
         isModalClosable: false,
         modalAdditionalClass: "game-over",
+      };
+    case ACTIONS.EXIT_GAME:
+      return {
+        modalShow: true,
+        modalContent:
+          action.payload.value === 0
+            ? UI_TEXT.exitMessageZero
+            : UI_TEXT.exitMessage + action.payload.value + ".",
+        modalBackdrop: true,
+        isModalClosable: true,
+        modalAdditionalClass: "ask-audience",
       };
     default:
       return state;

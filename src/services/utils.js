@@ -10,4 +10,22 @@ const sortQuestionsByDifficulty = (questions) => {
   );
 };
 
-export { randomSort, sortQuestionsByDifficulty };
+const getValueWon = (currentValue, questionValues) => {
+  const safeQuestionValues = questionValues.filter(
+    (question) => question.type === "safe"
+  );
+
+  for (let i = 0; i < safeQuestionValues.length; i++) {
+    if (currentValue < safeQuestionValues[0].value) return 0;
+    if (currentValue < safeQuestionValues[i].value)
+      return safeQuestionValues[i - 1].value.toLocaleString();
+    if (
+      currentValue === safeQuestionValues[safeQuestionValues.length - 1].value
+    )
+      return safeQuestionValues[
+        safeQuestionValues.length - 1
+      ].value.toLocaleString();
+  }
+};
+
+export { randomSort, sortQuestionsByDifficulty, getValueWon };

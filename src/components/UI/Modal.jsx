@@ -8,17 +8,16 @@ import styles from "./Modal.module.css";
 
 const Modal = (props) => {
   const navigate = useNavigate();
-  const { navigateTo } = props;
-  const { hideModalHandler } = useModal();
+  const { hideModalHandler, navigatesTo } = useModal();
 
   const returnToMainMenu = () => {
     navigate("/");
   };
 
-  const clickHandler = (navigateTo) => {
-    if (navigateTo === "/" || !navigateTo) returnToMainMenu();
+  const clickHandler = () => {
+    if (navigatesTo === "/" || !navigatesTo) returnToMainMenu();
     else {
-      navigate(navigateTo);
+      navigate(navigatesTo);
     }
     hideModalHandler();
   };
@@ -46,7 +45,7 @@ const Modal = (props) => {
       </BSModal.Body>
       <BSModal.Footer className={`m-0 border-0 d-flex justify-content-center`}>
         {props.isExitModal && (
-          <Button onClick={() => clickHandler(navigateTo)}>
+          <Button onClick={() => clickHandler()}>
             {UI_TEXT.modalButtons.leaveGame}
           </Button>
         )}
@@ -54,7 +53,7 @@ const Modal = (props) => {
           <Button onClick={props.onHide}>{UI_TEXT.modalButtons.close}</Button>
         )}
         {!props.closeModal && (
-          <Button onClick={() => clickHandler(navigateTo)}>
+          <Button onClick={() => clickHandler()}>
             {UI_TEXT.modalButtons.returnToMainMenu}
           </Button>
         )}

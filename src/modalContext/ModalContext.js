@@ -49,9 +49,12 @@ export const ModalProvider = ({ children }) => {
     dispatch({ type: ACTIONS.GAME_WON });
   };
 
-  const exitForAuthHandler = () => {
-    if (localStorage.getItem("gameStarted") !== "1") {
-      dispatch({ type: ACTIONS.EXIT_FOR_AUTH });
+  const exitForAuthHandler = (navigatesTo) => {
+    if (localStorage.getItem("gameStarted") === "1") {
+      dispatch({
+        type: ACTIONS.EXIT_FOR_AUTH,
+        payload: { navigatesTo: navigatesTo },
+      });
     }
   };
 
@@ -63,6 +66,7 @@ export const ModalProvider = ({ children }) => {
     isModalClosable: modalState.isModalClosable,
     modalAskAudience: modalState.modalAskAudience,
     isExitModal: modalState.isExitModal,
+    navigatesTo: modalState.navigatesTo,
     askTheAudienceHandler,
     callAFriendHandler,
     timeExpiredHandler,

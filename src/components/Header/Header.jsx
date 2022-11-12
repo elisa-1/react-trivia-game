@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
@@ -8,11 +7,8 @@ import Modal from "../UI/Modal";
 import styles from "./Header.module.css";
 
 const Header = () => {
-  const [navigateTo, setNavigateTo] = useState("");
   const storedGameStartedFlag = localStorage.getItem("gameStarted");
   const navigate = useNavigate();
-
-  console.log(navigateTo);
 
   const {
     modalShow,
@@ -27,7 +23,7 @@ const Header = () => {
   } = useModal();
 
   const navLinks =
-    storedGameStartedFlag === "1" ? (
+    storedGameStartedFlag !== "1" ? (
       <>
         <Link className="nav-link" to="/">
           Home
@@ -44,8 +40,7 @@ const Header = () => {
         <Link
           className="nav-link"
           onClick={() => {
-            exitForAuthHandler();
-            setNavigateTo("/");
+            exitForAuthHandler("/");
           }}
         >
           Home
@@ -53,8 +48,7 @@ const Header = () => {
         <Link
           className="nav-link"
           onClick={() => {
-            exitForAuthHandler();
-            setNavigateTo("/signin");
+            exitForAuthHandler("/signin");
           }}
         >
           Sign In
@@ -62,11 +56,9 @@ const Header = () => {
         <Link
           className="nav-link"
           onClick={() => {
-            exitForAuthHandler();
-            setNavigateTo("/signup");
+            exitForAuthHandler("/signup");
           }}
         >
-          {" "}
           Sign Up
         </Link>
       </>
@@ -83,7 +75,6 @@ const Header = () => {
         navigatesToMenu={navigatesToMenu}
         onHide={hideModalHandler}
         modalAdditionalClass={modalAdditionalClass}
-        navigateTo={navigateTo}
         goToMainMenu={() => {
           navigate("/");
         }}

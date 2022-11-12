@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Form as BSForm } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { UI_TEXT } from "../../services/constants";
@@ -5,6 +6,10 @@ import Button from "../UI/Button";
 import styles from "./AuthForm.module.css";
 
 const AuthForm = (props) => {
+  useEffect(() => {
+    localStorage.clear();
+  }, []);
+
   return (
     <main
       className={`d-flex justify-content-center align-items-center ${styles["main-auth"]}`}

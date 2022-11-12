@@ -16,7 +16,7 @@ const Home = () => {
 
   useEffect(() => {
     hideModalHandler();
-    localStorage.setItem("gameStarted", "1");
+    localStorage.clear();
 
     const getData = async () => {
       try {
@@ -44,7 +44,7 @@ const Home = () => {
   const handleFormSubmit = (ev) => {
     ev.preventDefault();
     const category = selectedCategory.toLocaleLowerCase().split(" ")[0];
-    localStorage.clear();
+    localStorage.setItem("gameStarted", "1");
     navigate(`/game/${category}`);
   };
 

@@ -8,6 +8,7 @@ export const initialState = {
   isModalClosable: true,
   modalAskAudience: {},
   isExitModal: false,
+  navigatesTo: "",
 };
 
 export const ACTIONS = {
@@ -101,6 +102,7 @@ export const reducer = (state, action) => {
         isModalClosable: true,
         modalAdditionalClass: "ask-audience",
         isExitModal: true,
+        navigatesTo: action.payload.navigatesTo
       };
     default:
       throw new Error(`No case for type ${action.type} found.`);

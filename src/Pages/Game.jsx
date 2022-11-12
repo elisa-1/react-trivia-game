@@ -166,6 +166,10 @@ const Game = () => {
     checkAnswer();
   };
 
+  const testFunction = () => {
+    
+  }
+
   return (
     <main
       className={`d-flex flex-column justify-content-center align-items-center gap-3 ${styles["main-game"]}`}

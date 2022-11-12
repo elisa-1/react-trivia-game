@@ -10,6 +10,7 @@ export const ACTIONS = {
   TIME_EXPIRED: "time-expired",
   GAME_WON: "game-won",
   EXIT_GAME: "exit-game",
+  EXIT_FOR_AUTH: "exit-for-auth",
 };
 
 export const reducer = (state, action) => {
@@ -77,6 +78,15 @@ export const reducer = (state, action) => {
           action.payload.value === 0
             ? UI_TEXT.exitMessageZero
             : UI_TEXT.exitMessage + action.payload.value + ".",
+        modalBackdrop: true,
+        isModalClosable: true,
+        modalAdditionalClass: "ask-audience",
+        isExitModal: true,
+      };
+    case ACTIONS.EXIT_FOR_AUTH:
+      return {
+        modalShow: true,
+        modalContent: UI_TEXT.exitMessageAuth,
         modalBackdrop: true,
         isModalClosable: true,
         modalAdditionalClass: "ask-audience",

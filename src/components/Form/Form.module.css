@@ -7,7 +7,7 @@
 }
 
 .form:is(.categories) {
-  width: 20vw;
+  width: 25vw;
 }
 
 .form-label {
@@ -17,6 +17,12 @@
   text-align: center;
   margin: 0;
   font-size: 1.2rem;
+}
+
+@media (max-width: 1100px) {
+  .form:is(.categories) {
+    min-width: 30vw;
+  }
 }
 
 @media (max-width: 768px) {

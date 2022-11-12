@@ -7,8 +7,12 @@ const UI_TEXT = {
   askTheAudienceMessage: "See below what our audience thinks: ",
   timeExpired: "Sorry. Your time expired. Game over.",
   exitButtonMessage: "GET $",
-  exitMessageZero: "Are you sure you want to leave the game? If you leave now, you will not get any money.",
-  exitMessage: "Are you sure you want to leave the game? If you leave now, you only take $"
+  exitMessageZero:
+    "Are you sure you want to leave the game? If you leave now, you will not get any money.",
+  exitMessage:
+    "Are you sure you want to leave the game? If you leave now, you only take $",
+  exitMessageAuth:
+    "Are you sure you want to leave the game? You will lose your progress.",
 };
 
 const listLetters = ["A", "B", "C", "D"];

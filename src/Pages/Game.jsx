@@ -1,9 +1,9 @@
-import { useState, useEffect, useReducer, useCallback } from "react";
+import { useState, useEffect } from "react";
+import useModal from "../modalContext/ModalContext";
 import { useNavigate, useParams } from "react-router-dom";
 import { getQuestions } from "../services/api";
 import { listLetters } from "../services/constants";
 import { randomSort, sortQuestionsByDifficulty } from "../services/utils";
-import { ACTIONS, reducer } from "../components/modalReducer";
 import Form from "../components/Form/Form";
 import Modal from "../components/UI/Modal";
 import Scoreboard from "../components/Scoreboard/Scoreboard";
@@ -14,6 +14,24 @@ import Spinner from "../components/UI/Spinner";
 import styles from "./Game.module.css";
 
 const Game = () => {
+  const {
+    modalShow,
+    modalContent,
+    modalBackdrop,
+    modalAdditionalClass,
+    isModalClosable,
+    modalAskAudience,
+    isExitModal,
+    askTheAudienceHandler,
+    callAFriendHandler,
+    timeExpiredHandler,
+    hideModalHandler,
+    exitHandler,
+    noAnswerSelectedHandler,
+    incorrectAnswerHandler,
+    gameWonHandler,
+  } = useModal();
+
   const storedQuestions = localStorage.getItem("questions");
   const storedQuestionNo = localStorage.getItem("questionNo");
   const storedCurrentAnswers = localStorage.getItem("currentAnswers");
@@ -26,15 +44,6 @@ const Game = () => {
   const [selectedAnswer, setSelectedAnswer] = useState("");
   const [timerIsReset, setTimerIsReset] = useState(false);
   const [timerIsPaused, setTimerIsPaused] = useState(false);
-  const [modalState, dispatch] = useReducer(reducer, {
-    modalShow: false,
-    modalContent: "",
-    modalBackdrop: true,
-    modalAdditionalClass: "",
-    isModalClosable: true,
-    modalAskAudience: {},
-    isExitModal: false,
-  });
 
   const { category } = useParams();
   const navigate = useNavigate();
@@ -108,34 +117,28 @@ const Game = () => {
 
   const handleAskTheAudience = () => {
     setTimerIsPaused(true);
-    dispatch({
-      type: ACTIONS.ASK_THE_AUDIENCE_LIFELINE,
-      payload: {
-        answers: currentQuestionAnswers,
-        correctAnswer: questions[questionNo].correctAnswer,
-      },
-    });
+    askTheAudienceHandler(
+      currentQuestionAnswers,
+      questions[questionNo].correctAnswer
+    );
   };
 
   const handleCallAFriend = () => {
     setTimerIsPaused(true);
-    dispatch({
-      type: ACTIONS.CALL_FRIEND_LIFELINE,
-      payload: { correctAnswer: questions[questionNo].correctAnswer },
-    });
+    callAFriendHandler(questions[questionNo].correctAnswer);
   };
 
-  const handleTimeExpired = useCallback(() => {
-    dispatch({ type: ACTIONS.TIME_EXPIRED });
-  }, []);
+  const handleTimeExpired = () => {
+    timeExpiredHandler();
+  };
 
   const handleHideModal = () => {
-    dispatch({ type: ACTIONS.HIDE_MODAL });
+    hideModalHandler();
     setTimerIsPaused(false);
   };
 
   const handleExit = (value) => {
-    dispatch({ type: ACTIONS.EXIT_GAME, payload: { value: value } });
+    exitHandler(value);
     setTimerIsPaused(true);
   };
 
@@ -145,10 +148,12 @@ const Game = () => {
       selectedAnswer.includes(currentCorrectAnswer);
 
     if (!selectedAnswer) {
-      dispatch({ type: ACTIONS.NO_ANSWER_SELECTED });
+      noAnswerSelectedHandler();
+      setTimerIsPaused(true);
     }
     if (selectedAnswer && !isCorrectAnswerSelected) {
-      dispatch({ type: ACTIONS.INCORRECT_ANSWER });
+      incorrectAnswerHandler();
+      setTimerIsPaused(true);
     }
     if (isCorrectAnswerSelected && questionNo < questions.length - 1) {
       setQuestionNo((prevNo) => prevNo + 1);
@@ -156,7 +161,7 @@ const Game = () => {
       setTimerIsReset(true);
     }
     if (isCorrectAnswerSelected && questionNo === questions.length - 1) {
-      dispatch({ type: ACTIONS.GAME_WON });
+      gameWonHandler();
     }
     setSelectedAnswer("");
   };
@@ -166,23 +171,19 @@ const Game = () => {
     checkAnswer();
   };
 
-  const testFunction = () => {
-    
-  }
-
   return (
     <main
       className={`d-flex flex-column justify-content-center align-items-center gap-3 ${styles["main-game"]}`}
     >
       <Modal
-        show={modalState.modalShow}
-        backdrop={modalState.modalBackdrop}
+        show={modalShow}
+        backdrop={modalBackdrop}
         onHide={handleHideModal}
-        content={modalState.modalContent}
-        closeModal={modalState.isModalClosable}
-        isExitModal={modalState.isExitModal}
-        modalAdditionalClass={modalState.modalAdditionalClass}
-        modalAskAudience={modalState.modalAskAudience}
+        content={modalContent}
+        closeModal={isModalClosable}
+        isExitModal={isExitModal}
+        modalAdditionalClass={modalAdditionalClass}
+        modalAskAudience={modalAskAudience}
         goToMainMenu={() => {
           navigate("/");
         }}

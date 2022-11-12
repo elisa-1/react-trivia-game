@@ -1,9 +1,17 @@
-import Button from "./Button";
+import useModal from "../../modalContext/ModalContext";
 import { Modal as BSModal } from "react-bootstrap";
-import styles from "./Modal.module.css";
 import AskAudienceBars from "../Lifeline/AskAudienceBars";
+import Button from "./Button";
+import styles from "./Modal.module.css";
 
 const Modal = (props) => {
+  const { hideModalHandler } = useModal();
+
+  const returnToMainMenuHandler = () => {
+    props.goToMainMenu();
+    hideModalHandler();
+  };
+
   return (
     <BSModal
       onHide={props.onHide}
@@ -27,11 +35,11 @@ const Modal = (props) => {
       </BSModal.Body>
       <BSModal.Footer className={`m-0 border-0 d-flex justify-content-center`}>
         {props.isExitModal && (
-          <Button onClick={props.goToMainMenu}>Leave Game</Button>
+          <Button onClick={returnToMainMenuHandler}>Leave Game</Button>
         )}
         {props.closeModal && <Button onClick={props.onHide}>Close</Button>}
         {!props.closeModal && (
-          <Button onClick={props.goToMainMenu}>Return to Main Menu</Button>
+          <Button onClick={returnToMainMenuHandler}>Return to Main Menu</Button>
         )}
       </BSModal.Footer>
     </BSModal>

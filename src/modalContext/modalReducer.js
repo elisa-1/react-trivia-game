@@ -1,16 +1,26 @@
 import { UI_TEXT } from "../services/constants";
 
+export const initialState = {
+  modalShow: false,
+  modalContent: "",
+  modalBackdrop: true,
+  modalAdditionalClass: "",
+  isModalClosable: true,
+  modalAskAudience: {},
+  isExitModal: false,
+};
+
 export const ACTIONS = {
-  SHOW_MODAL: "show-modal",
-  HIDE_MODAL: "hide-modal",
-  INCORRECT_ANSWER: "incorrect-answer",
-  NO_ANSWER_SELECTED: "no-answer-selected",
-  CALL_FRIEND_LIFELINE: "call-friend-lifeline",
-  ASK_THE_AUDIENCE_LIFELINE: "ask-the-audience-lifeline",
-  TIME_EXPIRED: "time-expired",
-  GAME_WON: "game-won",
-  EXIT_GAME: "exit-game",
-  EXIT_FOR_AUTH: "exit-for-auth",
+  SHOW_MODAL: "SHOW_MODAL",
+  HIDE_MODAL: "HIDE_MODAL",
+  INCORRECT_ANSWER: "INCORRECT_ANSWER",
+  NO_ANSWER_SELECTED: "NO_ANSWER_SELECTED",
+  CALL_FRIEND_LIFELINE: "CALL_FRIEND_LIFELINE",
+  ASK_THE_AUDIENCE_LIFELINE: "ASK_THE_AUDIENCE_LIFELINE",
+  TIME_EXPIRED: "TIME_EXPIRED",
+  GAME_WON: "GAME_WON",
+  EXIT_GAME: "EXIT_GAME",
+  EXIT_FOR_AUTH: "EXIT_FOR_AUTH",
 };
 
 export const reducer = (state, action) => {
@@ -93,6 +103,6 @@ export const reducer = (state, action) => {
         isExitModal: true,
       };
     default:
-      return state;
+      throw new Error(`No case for type ${action.type} found.`)
   }
 };

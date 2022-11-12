@@ -10,6 +10,7 @@ import Scoreboard from "../components/Scoreboard/Scoreboard";
 import LifelineBar from "../components/Lifeline/LifelineBar";
 import Timer from "../components/Timer/Timer";
 import Exit from "../components/Exit/Exit";
+import Spinner from "../components/UI/Spinner";
 import styles from "./Game.module.css";
 
 const Game = () => {
@@ -32,6 +33,7 @@ const Game = () => {
     modalAdditionalClass: "",
     isModalClosable: true,
     modalAskAudience: {},
+    isExitModal: false,
   });
 
   const { category } = useParams();
@@ -174,13 +176,14 @@ const Game = () => {
         onHide={handleHideModal}
         content={modalState.modalContent}
         closeModal={modalState.isModalClosable}
+        isExitModal={modalState.isExitModal}
         modalAdditionalClass={modalState.modalAdditionalClass}
         modalAskAudience={modalState.modalAskAudience}
         goToMainMenu={() => {
           navigate("/");
         }}
       />
-      {questions && (
+      {questions ? (
         <>
           <Exit questionNo={questionNo} handleExit={handleExit} />
           <Timer
@@ -207,6 +210,8 @@ const Game = () => {
             <Scoreboard questionNo={questionNo} />
           </section>
         </>
+      ) : (
+        <Spinner />
       )}
     </main>
   );

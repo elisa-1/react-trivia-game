@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { getCategories } from "../services/api";
 import { UI_TEXT } from "../services/constants";
 import Form from "../components/Form/Form";
+import Spinner from "../components/UI/Spinner";
 import milionnaireLogo from "../assets/logo-489x489.png";
 import styles from "./Home.module.css";
 
@@ -46,7 +47,7 @@ const Home = () => {
     <main
       className={`d-flex justify-content-center align-items-center ${styles["main-home"]}`}
     >
-      {categories.length > 1 && (
+      {categories.length > 1 ? (
         <>
           <Form
             data={categories}
@@ -62,6 +63,8 @@ const Home = () => {
             />
           </div>
         </>
+      ) : (
+        <Spinner />
       )}
     </main>
   );

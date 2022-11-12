@@ -26,9 +26,11 @@ const Modal = (props) => {
         )}
       </BSModal.Body>
       <BSModal.Footer className={`m-0 border-0 d-flex justify-content-center`}>
-        {props.closeModal ? (
-          <Button onClick={props.onHide}>Close</Button>
-        ) : (
+        {props.isExitModal && (
+          <Button onClick={props.goToMainMenu}>Leave Game</Button>
+        )}
+        {props.closeModal && <Button onClick={props.onHide}>Close</Button>}
+        {!props.closeModal && (
           <Button onClick={props.goToMainMenu}>Return to Main Menu</Button>
         )}
       </BSModal.Footer>

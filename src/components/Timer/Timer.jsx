@@ -4,10 +4,10 @@ import styles from "./Timer.module.css";
 
 const Timer = (props) => {
   const storedRemainingTime = localStorage.getItem("remainingTime");
-  console.log(storedRemainingTime);
-
   const { timerValue, timerIsReset, timerIsPaused, handleTimeExpired } = props;
-  const [remainingTime, setRemainingTime] = useState(storedRemainingTime ? +storedRemainingTime : timerValue);
+  const [remainingTime, setRemainingTime] = useState(
+    storedRemainingTime ? +storedRemainingTime : timerValue
+  );
 
   useEffect(() => {
     let interval;

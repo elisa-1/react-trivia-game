@@ -80,6 +80,7 @@ export const reducer = (state, action) => {
         modalBackdrop: true,
         isModalClosable: true,
         modalAdditionalClass: "ask-audience",
+        isExitModal: true,
       };
     default:
       return state;

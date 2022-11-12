@@ -1,4 +1,5 @@
 import useModal from "../../modalContext/ModalContext";
+import { UI_TEXT } from "../../services/constants";
 import { Modal as BSModal } from "react-bootstrap";
 import AskAudienceBars from "../Lifeline/AskAudienceBars";
 import Button from "./Button";
@@ -35,11 +36,17 @@ const Modal = (props) => {
       </BSModal.Body>
       <BSModal.Footer className={`m-0 border-0 d-flex justify-content-center`}>
         {props.isExitModal && (
-          <Button onClick={returnToMainMenuHandler}>Leave Game</Button>
+          <Button onClick={returnToMainMenuHandler}>
+            {UI_TEXT.modalButtons.leaveGame}
+          </Button>
         )}
-        {props.closeModal && <Button onClick={props.onHide}>Close</Button>}
+        {props.closeModal && (
+          <Button onClick={props.onHide}>{UI_TEXT.modalButtons.close}</Button>
+        )}
         {!props.closeModal && (
-          <Button onClick={returnToMainMenuHandler}>Return to Main Menu</Button>
+          <Button onClick={returnToMainMenuHandler}>
+            {UI_TEXT.modalButtons.returnToMainMenu}
+          </Button>
         )}
       </BSModal.Footer>
     </BSModal>

@@ -1,2 +1,26 @@
+.main-auth {
+  background-image: url("../../assets/white-wave.png");
+}
+
 .auth-form {
+  width: 25vw;
+  min-height: 50vh;
+  height: auto;
+  border-radius: 3%;
+  -webkit-box-shadow: 5px 5px 60px 60px var(--secondary-lighter);
+  box-shadow: 5px 5px 60px 60px var(--secondary-lighter);
+}
+
+@media (max-width: 1100px) {
+  .auth-form {
+    width: 50vw;
+    min-height: 55vh;
+  }
+}
+
+@media (max-width: 768px) {
+  .auth-form {
+    width: auto;
+    max-width: 90vw;
+  }
 }

@@ -12,7 +12,23 @@ const UI_TEXT = {
   exitMessage:
     "Are you sure you want to leave the game? If you leave now, you only take $",
   exitMessageAuth:
-    "Are you sure you want to leave the game? You will lose this game's progress.",
+    "Are you sure you want to leave the game? Your progress will not be saved.",
+
+  authForm: {
+    emailLabel: "Email address:",
+    passwordLabel: "Password:",
+    emailText: "We'll never share your email with anyone else.",
+    passwordText:
+      "Passwords must have at least 8 characters and contain at least two of the following: uppercase letters, lowercase letters, numbers, and symbols.",
+  },
+
+  modalButtons: {
+    close: "Close",
+    returnToMainMenu: "Return to Main Menu",
+    leaveGame: "Leave Game",
+    goToSignIn: "Sign In",
+    goToSignUp: "Sign Up"
+  }
 };
 
 const listLetters = ["A", "B", "C", "D"];

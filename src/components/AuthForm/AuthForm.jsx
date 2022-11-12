@@ -16,11 +16,16 @@ const AuthForm = (props) => {
     >
       <BSForm
         className={`d-flex flex-column justify-content-around p-4 mt-4 bg-white  ${styles["auth-form"]}`}
+        onSubmit={props.onSubmit}
       >
         <h2 className="text-center my-3">{props.formTitle}</h2>
         <BSForm.Group className="mb-3" controlId="formBasicEmail">
           <BSForm.Label>{UI_TEXT.authForm.emailLabel}</BSForm.Label>
-          <BSForm.Control type="email" placeholder="Enter email" />
+          <BSForm.Control
+            type="email"
+            placeholder="Enter email"
+            onChange={(event) => props.onChangeEmail(event.target.value)}
+          />
           {props.formType === "signup" && (
             <BSForm.Text className="text-muted">
               {UI_TEXT.authForm.emailText}
@@ -30,7 +35,11 @@ const AuthForm = (props) => {
 
         <BSForm.Group className="mb-3" controlId="formBasicPassword">
           <BSForm.Label> {UI_TEXT.authForm.passwordLabel}</BSForm.Label>
-          <BSForm.Control type="password" placeholder="Password" />
+          <BSForm.Control
+            type="password"
+            placeholder="Password"
+            onChange={(event) => props.onChangePassword(event.target.value)}
+          />
           {props.formType === "signup" && (
             <BSForm.Text className="text-muted">
               {UI_TEXT.authForm.passwordText}

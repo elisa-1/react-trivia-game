@@ -16,7 +16,7 @@ const Home = () => {
 
   useEffect(() => {
     hideModalHandler();
-    localStorage.setItem("gameStarted", "true");
+    localStorage.setItem("gameStarted", "1");
 
     const getData = async () => {
       try {
@@ -35,7 +35,7 @@ const Home = () => {
       }
     };
     getData();
-  }, []);
+  }, [hideModalHandler]);
 
   const handleSelectedCategory = (value) => {
     if (selectedCategory !== value) setSelectedCategory(value);

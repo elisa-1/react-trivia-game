@@ -128,10 +128,6 @@ const Game = () => {
     callAFriendHandler(questions[questionNo].correctAnswer);
   };
 
-  const handleTimeExpired = () => {
-    timeExpiredHandler();
-  };
-
   const handleHideModal = () => {
     hideModalHandler();
     setTimerIsPaused(false);
@@ -193,7 +189,7 @@ const Game = () => {
           <Exit questionNo={questionNo} handleExit={handleExit} />
           <Timer
             timerValue={20}
-            handleTimeExpired={handleTimeExpired}
+            handleTimeExpired={timeExpiredHandler}
             timerIsReset={timerIsReset}
             timerIsPaused={timerIsPaused}
           />

@@ -5,3 +5,7 @@
 .header * {
   color: inherit;
 }
+
+.brand {
+  user-select: none;
+}

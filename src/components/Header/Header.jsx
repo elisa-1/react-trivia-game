@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -7,6 +7,7 @@ import Modal from "../UI/Modal";
 import styles from "./Header.module.css";
 
 const Header = () => {
+  const storedGameStartedFlag = localStorage.getItem("gameStarted");
   const navigate = useNavigate();
 
   const {
@@ -19,6 +20,33 @@ const Header = () => {
     modalAdditionalClass,
     hideModalHandler,
   } = useModal();
+
+  const navLinks =
+    storedGameStartedFlag === "1" ? (
+      <>
+        <Link className="nav-link" to="/">
+          Home
+        </Link>
+        <Link className="nav-link" to="/signin">
+          Sign In
+        </Link>
+        <Link className="nav-link" to="/signup">
+          Sign Up
+        </Link>
+      </>
+    ) : (
+      <>
+        <Link className="nav-link" onClick={exitForAuthHandler}>
+          Home
+        </Link>
+        <Link className="nav-link" onClick={exitForAuthHandler}>
+          Sign In
+        </Link>
+        <Link className="nav-link" onClick={exitForAuthHandler}>
+          Sign Up
+        </Link>
+      </>
+    );
 
   return (
     <>
@@ -36,13 +64,10 @@ const Header = () => {
       />
       <Navbar expand="lg" className={`${styles.header}`}>
         <Container>
-          <Navbar.Brand>React Millionaire Game</Navbar.Brand>
+          <Navbar.Brand className={styles.brand}>React Millionaire Game</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="ms-auto">
-              <Nav.Link onClick={exitForAuthHandler}>Item</Nav.Link>
-              <Nav.Link onClick={exitForAuthHandler}>Item</Nav.Link>
-            </Nav>
+            <Nav className="ms-auto">{navLinks}</Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>

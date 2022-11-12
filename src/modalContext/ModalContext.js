@@ -29,9 +29,9 @@ export const ModalProvider = ({ children }) => {
     dispatch({ type: ACTIONS.TIME_EXPIRED });
   }, []);
 
-  const hideModalHandler = () => {
+  const hideModalHandler = useCallback(() => {
     dispatch({ type: ACTIONS.HIDE_MODAL });
-  };
+  }, []);
 
   const exitHandler = (value) => {
     dispatch({ type: ACTIONS.EXIT_GAME, payload: { value: value } });
@@ -50,7 +50,7 @@ export const ModalProvider = ({ children }) => {
   };
 
   const exitForAuthHandler = () => {
-    if (localStorage.getItem("gameStarted") !== "true") {
+    if (localStorage.getItem("gameStarted") !== "1") {
       dispatch({ type: ACTIONS.EXIT_FOR_AUTH });
     }
   };

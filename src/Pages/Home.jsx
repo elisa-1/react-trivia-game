@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import useModal from "../modalContext/ModalContext";
 import { getCategories } from "../services/api";
 import { UI_TEXT } from "../services/constants";
 import Form from "../components/Form/Form";
@@ -8,6 +9,7 @@ import milionnaireLogo from "../assets/logo-489x489.png";
 import styles from "./Home.module.css";
 
 const Home = () => {
+  const { hideModalHandler } = useModal();
   const [categories, setCategories] = useState(["All"]);
   const [selectedCategory, setSelectedCategory] = useState("All");
   const navigate = useNavigate();
@@ -40,6 +42,7 @@ const Home = () => {
     ev.preventDefault();
     const category = selectedCategory.toLocaleLowerCase().split(" ")[0];
     localStorage.clear();
+    hideModalHandler();
     navigate(`/game/${category}`);
   };
 

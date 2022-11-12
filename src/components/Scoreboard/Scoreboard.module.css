@@ -17,18 +17,33 @@
   }
 
   .current-question {
-    animation-name: example;
+    animation-name: background-change-orange;
     animation-duration: 2s;
     animation-iteration-count: infinite;
   }
 
-  @keyframes example {
+  .current-question:is(.safe-question) {
+    animation-name: background-change-white;
+  }
+
+  @keyframes background-change-orange {
     from {
       background-color: transparent;
       color: inherit;
     }
     to {
       background-color: var(--dark-orange);
+      color: black;
+    }
+  }
+
+  @keyframes background-change-white {
+    from {
+      background-color: transparent;
+      color: inherit;
+    }
+    to {
+      background-color: white;
       color: black;
     }
   }

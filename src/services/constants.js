@@ -3,7 +3,7 @@ const UI_TEXT = {
   incorrectAnswer: "Sorry. The answer was incorrect. Game over.",
   noAnswerSelected: "Please select an answer.",
   gameWon: "Congratulations. You won 1,000,000$!",
-  callFriendMessage: "Friend: I am not sure, but I think that the correct answer is: ",
+  callFriendMessage: "Friend: I am not sure, but I think that the correct answer is ",
   askTheAudienceMessage: "See below what our audience thinks: ",
   timeExpired: "Sorry. Your time expired. Game over.",
   exitButtonMessage: "GET $",

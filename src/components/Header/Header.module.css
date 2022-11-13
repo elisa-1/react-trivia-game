@@ -1,11 +1,39 @@
 .header {
-  color: var(--main-darker);
+  color: white;
+  background: var(--secondary);
+  background: var(--secondary-gradient-linear-header);
 }
 
 .header * {
   color: inherit;
 }
 
+.header a:hover,
+.header a:active,
+.header a:focus {
+  color: inherit;
+  text-decoration: underline;
+}
+
 .brand {
   user-select: none;
+}
+
+.brand:hover {
+  color: inherit;
+}
+
+.navbar-text {
+  border-left: 1px solid var(--main-darker);
+  padding-left: 1rem;
+  margin: 0 1rem;
+}
+
+@media (max-width: 768px) {
+  .navbar-text {
+    border-top: 1px solid var(--main-darker);
+    border-left: none;
+    margin: 0;
+    padding-left: 0;
+  }
 }

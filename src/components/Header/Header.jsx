@@ -4,12 +4,13 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import useModal from "../../modalContext/ModalContext";
 import Modal from "../UI/Modal";
+import Button from "../UI/Button";
+import { UserAuth } from "../../authContext/AuthContext";
 import styles from "./Header.module.css";
 
 const Header = () => {
   const storedGameStartedFlag = localStorage.getItem("gameStarted");
   const navigate = useNavigate();
-
   const {
     modalShow,
     modalBackdrop,
@@ -22,7 +23,9 @@ const Header = () => {
     navigatesToMenu,
   } = useModal();
 
-  const navLinks =
+  const { user, logout } = UserAuth();
+
+  const noUserNavLinks =
     storedGameStartedFlag !== "1" ? (
       <>
         <Link className="nav-link" to="/">
@@ -37,32 +40,74 @@ const Header = () => {
       </>
     ) : (
       <>
-        <Link
-          className="nav-link"
+        <Nav.Link
           onClick={() => {
             exitForAuthHandler("/");
           }}
         >
           Home
-        </Link>
-        <Link
-          className="nav-link"
+        </Nav.Link>
+        <Nav.Link
           onClick={() => {
             exitForAuthHandler("/signin");
           }}
         >
           Sign In
-        </Link>
-        <Link
-          className="nav-link"
+        </Nav.Link>
+        <Nav.Link
           onClick={() => {
             exitForAuthHandler("/signup");
           }}
         >
           Sign Up
-        </Link>
+        </Nav.Link>
       </>
     );
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      navigate("/");
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
+  const userConnectedNavLinks = (
+    <>
+      {storedGameStartedFlag !== "1" ? (
+        <>
+          <Link className="nav-link" to="/">
+            Home
+          </Link>
+          <Link className="nav-link" to="/gamestats">
+            Game Stats
+          </Link>
+        </>
+      ) : (
+        <>
+          <Nav.Link
+            onClick={() => {
+              exitForAuthHandler("/");
+            }}
+          >
+            Home
+          </Nav.Link>
+          <Nav.Link
+            onClick={() => {
+              exitForAuthHandler("/gamestats");
+            }}
+          >
+            Game Stats
+          </Nav.Link>
+        </>
+      )}
+      <Navbar.Text className={`${styles["navbar-text"]}`}>
+        Signed in as: {user?.email}
+      </Navbar.Text>
+      <Button onClick={handleLogout}>Logout</Button>
+    </>
+  );
 
   return (
     <>
@@ -79,14 +124,16 @@ const Header = () => {
           navigate("/");
         }}
       />
-      <Navbar expand="lg" className={`${styles.header}`}>
+      <Navbar expand="md" className={`${styles.header}`}>
         <Container>
           <Navbar.Brand className={styles.brand}>
             React Millionaire Game
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="ms-auto">{navLinks}</Nav>
+            <Nav className="ms-auto">
+              {!user ? noUserNavLinks : userConnectedNavLinks}
+            </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>

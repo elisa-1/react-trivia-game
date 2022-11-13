@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { UI_TEXT } from "../services/constants";
 import AuthForm from "../components/AuthForm/AuthForm";
 import { UserAuth } from "../authContext/AuthContext";
@@ -7,8 +8,8 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-
   const { createUser } = UserAuth();
+  const navigate = useNavigate();
 
   const formTitle = "Sign Up";
   const formType = "signup";
@@ -20,6 +21,7 @@ const SignUp = () => {
 
     try {
       await createUser(email, password);
+      navigate("/");
     } catch (err) {
       setError(err.message);
       console.log(err.message);

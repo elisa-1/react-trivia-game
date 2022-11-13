@@ -6,6 +6,7 @@
 
   --secondary: #030e3e;
   --secondary-lighter: #024c79aa;
+  --secondary-lighter-header: #024b79;
 
   --custom-bs-backdrop: #0000009d;
 
@@ -13,6 +14,12 @@
     var(--secondary-lighter),
     var(--secondary),
     var(--secondary-lighter)
+  );
+
+  --secondary-gradient-linear-header: linear-gradient(
+    var(--secondary-lighter-header),
+    var(--secondary),
+    var(--secondary-lighter-header)
   );
 
   --secondary-gradient-radial: radial-gradient(

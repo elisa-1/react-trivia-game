@@ -15,7 +15,7 @@ const AuthForm = (props) => {
       className={`d-flex justify-content-center align-items-center ${styles["main-auth"]}`}
     >
       <BSForm
-        className={`d-flex flex-column justify-content-around p-4 mt-4 bg-white  ${styles["auth-form"]}`}
+        className={`d-flex flex-column justify-content-around p-4 mt-4 bg-white ${styles["auth-form"]}`}
         onSubmit={props.onSubmit}
       >
         <h2 className="text-center my-3">{props.formTitle}</h2>

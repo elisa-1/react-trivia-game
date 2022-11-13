@@ -8,6 +8,10 @@
   color: inherit;
 }
 
+.header button > span {
+  filter: invert(100%);
+}
+
 .header a:hover,
 .header a:active,
 .header a:focus {

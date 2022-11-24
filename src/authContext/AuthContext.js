@@ -20,7 +20,7 @@ export const AuthContextProvider = ({ children }) => {
   };
 
   const createUserDoc = (email) => {
-    return addDoc(statsCollectionRef, { email: email });
+    return addDoc(statsCollectionRef, { email: email, gamesPlayedNumber: 0 });
   };
 
   const signIn = (email, password) => {
@@ -40,7 +40,14 @@ export const AuthContextProvider = ({ children }) => {
     };
   }, []);
 
-  const value = { createUser, user, logout, signIn, createUserDoc };
+  const value = {
+    createUser,
+    user,
+    logout,
+    signIn,
+    createUserDoc,
+    statsCollectionRef,
+  };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };

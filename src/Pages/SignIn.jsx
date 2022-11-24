@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { UI_TEXT } from "../services/constants";
 import AuthForm from "../components/AuthForm/AuthForm";
 import { UserAuth } from "../authContext/AuthContext";
@@ -7,7 +7,7 @@ import { UserAuth } from "../authContext/AuthContext";
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [, setError] = useState("");
   const { signIn } = UserAuth();
   const navigate = useNavigate();
 

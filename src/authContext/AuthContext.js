@@ -5,15 +5,22 @@ import {
   signOut,
   onAuthStateChanged,
 } from "firebase/auth";
-import { auth } from "../firebase/firebaseConfig";
+import { collection, addDoc } from "firebase/firestore";
+import { db, auth } from "../firebase/firebaseConfig";
 
 const UserContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState({});
 
+  const statsCollectionRef = collection(db, "stats");
+
   const createUser = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
+  };
+
+  const createUserDoc = (email) => {
+    return addDoc(statsCollectionRef, { email: email });
   };
 
   const signIn = (email, password) => {
@@ -33,7 +40,7 @@ export const AuthContextProvider = ({ children }) => {
     };
   }, []);
 
-  const value = { createUser, user, logout, signIn };
+  const value = { createUser, user, logout, signIn, createUserDoc };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };

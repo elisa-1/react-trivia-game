@@ -1,37 +1,21 @@
-import { useState, useEffect } from "react";
-import { query, where, getDocs } from "firebase/firestore";
+import { useEffect } from "react";
 import { UserAuth } from "../authContext/AuthContext";
 import styles from "./GameStats.module.css";
 
 const GameStats = () => {
-  const { user, statsCollectionRef } = UserAuth();
-
-  const [userDocId, setUserDocId] = useState("");
-  const [userData, setUserData] = useState([]);
+  const { user, getUserDoc, userData } = UserAuth();
 
   useEffect(() => {
     localStorage.clear();
-
-    if (user && user.email) {
-      const getCurrentData = async () => {
-        const q = query(statsCollectionRef, where("email", "==", user.email));
-        const querySnapshot = await getDocs(q);
-        querySnapshot.forEach((doc) => {
-          setUserDocId(doc.id);
-          setUserData(doc.data());
-        });
-      };
-      getCurrentData();
-    }
-  }, [user]);
+    getUserDoc(user);
+  }, [getUserDoc, user]);
 
   return (
     <main
       className={`d-flex justify-content-center align-items-center ${styles["main-game-stats"]}`}
     >
       <ul className="d-flex flex-column justify-content-center align-items-center list-unstyled p-4">
-        <li>{userDocId}</li>
-        <li>Number of games played:  {userData.gamesPlayedNumber}</li>
+        <li>Number of games played: {userData.gamesPlayedNumber} </li>
         <li>Number of 1,000,000$ won: </li>
         <br />
         <li>Preferred category: </li>

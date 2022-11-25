@@ -1,17 +1,25 @@
-import { useState, createContext, useContext, useEffect } from "react";
+import {
+  useState,
+  createContext,
+  useContext,
+  useEffect,
+  useCallback,
+} from "react";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
 } from "firebase/auth";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, query, where, getDocs } from "firebase/firestore";
 import { db, auth } from "../firebase/firebaseConfig";
 
 const UserContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState({});
+  const [userDocId, setUserDocId] = useState("");
+  const [userData, setUserData] = useState([]);
 
   const statsCollectionRef = collection(db, "stats");
 
@@ -26,6 +34,21 @@ export const AuthContextProvider = ({ children }) => {
   const signIn = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
+
+  const getUserDoc = useCallback((user) => {
+    if (user && user.email) {
+      const getCurrentData = async () => {
+        const q = query(statsCollectionRef, where("email", "==", user.email));
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+          setUserDocId(doc.id);
+          setUserData(doc.data());
+        });
+      };
+      getCurrentData();
+    }
+    // eslint-disable-next-line
+  }, []);
 
   const logout = () => {
     return signOut(auth);
@@ -47,6 +70,9 @@ export const AuthContextProvider = ({ children }) => {
     signIn,
     createUserDoc,
     statsCollectionRef,
+    getUserDoc,
+    userDocId,
+    userData,
   };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;

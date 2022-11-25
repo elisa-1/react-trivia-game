@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { doc, updateDoc, increment } from "firebase/firestore";
+import { db } from "../firebase/firebaseConfig";
 import useModal from "../modalContext/ModalContext";
+import { UserAuth } from "../authContext/AuthContext";
 import { getCategories } from "../services/api";
 import { UI_TEXT } from "../services/constants";
 import Form from "../components/Form/Form";
@@ -13,6 +16,8 @@ const Home = () => {
   const [categories, setCategories] = useState(["All"]);
   const [selectedCategory, setSelectedCategory] = useState("All");
   const navigate = useNavigate();
+  const { userDocId } = UserAuth();
+
 
   useEffect(() => {
     hideModalHandler();
@@ -41,10 +46,18 @@ const Home = () => {
     if (selectedCategory !== value) setSelectedCategory(value);
   };
 
+  const increaseGamesNumber = async () => {
+    const userDoc = doc(db, 'stats', userDocId);
+    await updateDoc(userDoc, {
+        gamesPlayedNumber : increment(1)
+    });
+}
+
   const handleFormSubmit = (ev) => {
     ev.preventDefault();
     const category = selectedCategory.toLocaleLowerCase().split(" ")[0];
     localStorage.setItem("gameStarted", "1");
+    increaseGamesNumber();
     navigate(`/game/${category}`);
   };
 

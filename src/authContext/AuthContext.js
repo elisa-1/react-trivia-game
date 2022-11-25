@@ -19,7 +19,7 @@ const UserContext = createContext();
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState({});
   const [userDocId, setUserDocId] = useState("");
-  const [userData, setUserData] = useState([]);
+  const [userData, setUserData] = useState({});
 
   const statsCollectionRef = collection(db, "stats");
 

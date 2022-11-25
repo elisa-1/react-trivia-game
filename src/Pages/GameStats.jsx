@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { UserAuth } from "../authContext/AuthContext";
+import { getMostCommon } from "../services/utils";
 import Spinner from "../components/UI/Spinner";
 import styles from "./GameStats.module.css";
 
@@ -11,6 +12,8 @@ const GameStats = () => {
     getUserDoc(user);
   }, [getUserDoc, user]);
 
+  console.log();
+
   return (
     <main
       className={`d-flex justify-content-center align-items-center ${styles["main-game-stats"]}`}
@@ -18,14 +21,14 @@ const GameStats = () => {
       <ul className="d-flex flex-column justify-content-center align-items-center list-unstyled p-4">
         {Object.keys(userData).length > 0 ? (
           <>
-            <li>Number of games played: {userData.gamesPlayedNumber} </li>
-            <li>Number of 1,000,000$ won: </li>
+            <li>Number of games started: {userData.gamesStarted} </li>
             <br />
-            <li>Preferred category: </li>
+            <li>Number of games won ($1,000,000): </li>
+            <li>Number of games ended (safety net): </li>
+            <li>Number of games lost: raspuns incorect sau time expired </li>
+            <li>Number of games abandoned: inchise din header </li>
             <br />
-            <li>Highest amount won: </li>
-            <li>Average amount won: </li>
-            <li>Lowest amount won: </li>
+            <li>Preferred category: {getMostCommon(userData.categories)}</li>
             <br />
             <li>Average time to answer: </li>
             <br />

@@ -16,8 +16,7 @@ const Home = () => {
   const [categories, setCategories] = useState(["All"]);
   const [selectedCategory, setSelectedCategory] = useState("All");
   const navigate = useNavigate();
-  const { userDocId } = UserAuth();
-
+  const { getUserDoc, user, userDocId, userData } = UserAuth();
 
   useEffect(() => {
     hideModalHandler();
@@ -40,24 +39,27 @@ const Home = () => {
       }
     };
     getData();
-  }, [hideModalHandler]);
+    getUserDoc(user);
+  }, [hideModalHandler, getUserDoc, user]);
 
   const handleSelectedCategory = (value) => {
     if (selectedCategory !== value) setSelectedCategory(value);
   };
 
-  const increaseGamesNumber = async () => {
-    const userDoc = doc(db, 'stats', userDocId);
-    await updateDoc(userDoc, {
-        gamesPlayedNumber : increment(1)
-    });
-}
+  const updateUserDoc = async () => {
+    const userDoc = doc(db, "stats", userDocId);
+    const newFields = {
+      gamesStarted: increment(1),
+      categories: [...userData.categories, selectedCategory],
+    };
+    await updateDoc(userDoc, newFields);
+  };
 
   const handleFormSubmit = (ev) => {
     ev.preventDefault();
     const category = selectedCategory.toLocaleLowerCase().split(" ")[0];
     localStorage.setItem("gameStarted", "1");
-    increaseGamesNumber();
+    updateUserDoc();
     navigate(`/game/${category}`);
   };
 

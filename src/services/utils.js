@@ -28,4 +28,10 @@ const getValueWon = (currentValue, questionValues) => {
   }
 };
 
-export { randomSort, sortQuestionsByDifficulty, getValueWon };
+const getMostCommon = (arr) => {
+  const count = {};
+  arr.forEach((elem) => (count[elem] ? (count[elem] += 1) : (count[elem] = 1)));
+  return Object.keys(count).sort((a, b) => count[b] - count[a])[0];
+};
+
+export { randomSort, sortQuestionsByDifficulty, getValueWon, getMostCommon };

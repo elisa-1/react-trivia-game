@@ -23,7 +23,7 @@ const Header = () => {
     navigatesToMenu,
   } = useModal();
 
-  const { user, logout } = UserAuth();
+  const { user, logout, setUserDocId, setUserData } = UserAuth();
 
   const noUserNavLinks =
     storedGameStartedFlag !== "1" ? (
@@ -67,6 +67,8 @@ const Header = () => {
   const handleLogout = async () => {
     try {
       await logout();
+      setUserDocId("");
+      setUserData({});
       navigate("/");
     } catch (err) {
       console.log(err.message);

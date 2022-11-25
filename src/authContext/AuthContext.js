@@ -28,7 +28,11 @@ export const AuthContextProvider = ({ children }) => {
   };
 
   const createUserDoc = (email) => {
-    return addDoc(statsCollectionRef, { email: email, gamesPlayedNumber: 0 });
+    return addDoc(statsCollectionRef, {
+      email: email,
+      gamesStarted: 0,
+      categories: [],
+    });
   };
 
   const signIn = (email, password) => {
@@ -73,6 +77,8 @@ export const AuthContextProvider = ({ children }) => {
     getUserDoc,
     userDocId,
     userData,
+    setUserDocId,
+    setUserData
   };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;

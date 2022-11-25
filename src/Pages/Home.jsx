@@ -19,6 +19,10 @@ const Home = () => {
   const { getUserDoc, user, userDocId, userData } = UserAuth();
 
   useEffect(() => {
+    getUserDoc(user);
+  }, [getUserDoc, user]);
+
+  useEffect(() => {
     hideModalHandler();
     localStorage.clear();
 
@@ -39,8 +43,7 @@ const Home = () => {
       }
     };
     getData();
-    getUserDoc(user);
-  }, [hideModalHandler, getUserDoc, user]);
+  }, [hideModalHandler]);
 
   const handleSelectedCategory = (value) => {
     if (selectedCategory !== value) setSelectedCategory(value);

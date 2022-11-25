@@ -1,13 +1,25 @@
 import { useState } from "react";
+import { doc, updateDoc, increment } from "firebase/firestore";
+import { db } from "../../firebase/firebaseConfig";
+import { UserAuth } from "../../authContext/AuthContext";
 import styles from "./Lifeline.module.css";
 
 const Lifeline = (props) => {
   const [isClickable, setIsClickable] = useState(true);
+  const { userDocId } = UserAuth();
+
+  const updateLifelinesNumberDoc = async () => {
+    const userDoc = doc(db, "stats", userDocId);
+    await updateDoc(userDoc, {
+      lifelinesUsed: increment(1),
+    });
+  };
 
   const handleClick = (type) => {
     props.onClick();
     setIsClickable(false);
     localStorage.setItem(`${type}`, "clicked");
+    updateLifelinesNumberDoc();
   };
 
   const disabledState =

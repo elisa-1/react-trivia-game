@@ -32,6 +32,7 @@ export const AuthContextProvider = ({ children }) => {
       email: email,
       gamesStarted: 0,
       categories: [],
+      lifelinesUsed: 0
     });
   };
 

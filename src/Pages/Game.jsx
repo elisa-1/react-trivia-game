@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import useModal from "../modalContext/ModalContext";
+import { UserAuth } from "../authContext/AuthContext";
 import { useParams } from "react-router-dom";
 import { getQuestions } from "../services/api";
 import { listLetters } from "../services/constants";
@@ -14,6 +15,8 @@ import Spinner from "../components/UI/Spinner";
 import styles from "./Game.module.css";
 
 const Game = () => {
+  const { getUserDoc, user } = UserAuth();
+
   const {
     modalShow,
     modalContent,
@@ -92,6 +95,12 @@ const Game = () => {
     }
     setTimerIsReset(false);
   }, [questions, questionNo, storedCurrentAnswers]);
+
+  useEffect(() => {
+    if (questions) {
+      getUserDoc(user);
+    }
+  }, [questions, getUserDoc, user]);
 
   const handleSelectedAnswer = (value) => {
     if (selectedAnswer !== value) setSelectedAnswer(value);

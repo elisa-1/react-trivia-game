@@ -21,18 +21,30 @@ const GameStats = () => {
       <ul className="d-flex flex-column justify-content-center align-items-center list-unstyled p-4">
         {Object.keys(userData).length > 0 ? (
           <>
-            <li>Number of games started: {userData.gamesStarted} </li>
+            <li>
+              Number of games started: <strong>{userData.gamesStarted}</strong>{" "}
+            </li>
             <br />
             <li>Number of games won ($1,000,000): </li>
             <li>Number of games ended (safety net): </li>
             <li>Number of games lost: raspuns incorect sau time expired </li>
             <li>Number of games abandoned: inchise din header </li>
             <br />
-            <li>Preferred category: {getMostCommon(userData.categories)}</li>
+            <li>
+              Preferred category:{" "}
+              <strong>
+                {userData.gamesStarted
+                  ? getMostCommon(userData.categories)
+                  : "-"}
+              </strong>
+            </li>
             <br />
             <li>Average time to answer: </li>
             <br />
-            <li>Total number of lifelines used: </li>
+            <li>
+              Total number of lifelines used:{" "}
+              <strong>{userData.lifelinesUsed}</strong>{" "}
+            </li>
           </>
         ) : (
           <Spinner />

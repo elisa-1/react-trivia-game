@@ -49,7 +49,7 @@ const Game = () => {
   const [selectedAnswer, setSelectedAnswer] = useState("");
   const [timerIsReset, setTimerIsReset] = useState(false);
   const [timerIsPaused, setTimerIsPaused] = useState(false);
-  const timerValue = 2000;
+  const timerValue = 20;
 
   const { category } = useParams();
 

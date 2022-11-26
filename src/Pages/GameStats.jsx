@@ -56,7 +56,21 @@ const GameStats = () => {
               </span>
             </li>
             <br />
-            <li> {UI_TEXT.gameStats.averageTimeToAnswer}</li>
+            <li>
+              {UI_TEXT.gameStats.totalQuestionsAnswered}
+              <span>{userData.answersTime.numberOfAnswers}</span>
+            </li>
+            <li>
+              {UI_TEXT.gameStats.averageTimeToAnswer}
+              <span>
+                {userData.answersTime.numberOfAnswers > 0
+                  ? `${(
+                      userData.answersTime.totalAnswerTime /
+                      userData.answersTime.numberOfAnswers
+                    ).toFixed(2)}s`
+                  : "-"}
+              </span>
+            </li>
             <br />
             <li>
               {UI_TEXT.gameStats.lifelinesUsed}

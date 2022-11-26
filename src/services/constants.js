@@ -22,6 +22,7 @@ const UI_TEXT = {
     gamesLost: "Number of games lost: ",
     gamesAbandoned: "Number of games abandoned: ",
     preferredCategory: "Preferred category: ",
+    totalQuestionsAnswered: "Total number of questions answered: ",
     averageTimeToAnswer: "Average time to answer: ",
     lifelinesUsed: "Total number of lifelines used: "
   },

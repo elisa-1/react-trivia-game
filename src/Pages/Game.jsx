@@ -49,6 +49,7 @@ const Game = () => {
   const [selectedAnswer, setSelectedAnswer] = useState("");
   const [timerIsReset, setTimerIsReset] = useState(false);
   const [timerIsPaused, setTimerIsPaused] = useState(false);
+  const timerValue = 20;
 
   const { category } = useParams();
 
@@ -161,15 +162,20 @@ const Game = () => {
       incorrectAnswerHandler();
       setTimerIsPaused(true);
       if (user) updateGamesLostDoc();
+      updateTimeDoc();
     }
     if (isCorrectAnswerSelected && questionNo < questions.length - 1) {
       setQuestionNo((prevNo) => prevNo + 1);
       localStorage.removeItem("currentAnswers");
       setTimerIsReset(true);
+      console.log(localStorage.getItem("remainingTime"));
+      updateTimeDoc();
     }
     if (isCorrectAnswerSelected && questionNo === questions.length - 1) {
       gameWonHandler();
+      setTimerIsPaused(true);
       if (user) updateGamesWonDoc();
+      updateTimeDoc();
     }
     setSelectedAnswer("");
   };
@@ -180,6 +186,16 @@ const Game = () => {
     // eslint-disable-next-line
   }, [timeExpiredHandler]);
 
+  const updateTimeDoc = async () => {
+    const userDoc = doc(db, "stats", userDocId);
+    const currentRemainingTime = +localStorage.getItem("remainingTime");
+    await updateDoc(userDoc, {
+      "answersTime.numberOfAnswers": increment(1),
+      "answersTime.totalAnswerTime": increment(
+        timerValue - currentRemainingTime
+      ),
+    });
+  };
   const updateGamesWonDoc = async () => {
     const userDoc = doc(db, "stats", userDocId);
     await updateDoc(userDoc, {
@@ -217,7 +233,7 @@ const Game = () => {
         <>
           <Exit questionNo={questionNo} handleExit={handleExit} />
           <Timer
-            timerValue={20}
+            timerValue={timerValue}
             handleTimeExpired={handleTimeExpired}
             timerIsReset={timerIsReset}
             timerIsPaused={timerIsPaused}

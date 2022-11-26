@@ -35,7 +35,11 @@ export const AuthContextProvider = ({ children }) => {
       gamesEnded: 0,
       gamesLost: 0,
       categories: [],
-      lifelinesUsed: 0
+      lifelinesUsed: 0,
+      answersTime: {
+        totalAnswerTime: 0,
+        numberOfAnswers: 0,
+      }
     });
   };
 

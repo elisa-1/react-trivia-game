@@ -7,7 +7,7 @@ import { UserAuth } from "../authContext/AuthContext";
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [, setError] = useState("");
+  const [error, setError] = useState("");
   const { signIn } = UserAuth();
   const navigate = useNavigate();
 
@@ -23,8 +23,14 @@ const SignIn = () => {
       await signIn(email, password);
       navigate("/");
     } catch (err) {
-      setError(err.message);
-      console.log(err.message);
+      if (err.code === "auth/wrong-password") {
+        setError(UI_TEXT.authFormErrors.incorrectPassword);
+      }
+      if (err.code === "auth/user-not-found") {
+        setError(UI_TEXT.authFormErrors.userNotFound);
+      } else {
+        setError(err.message);
+      }
     }
   };
 
@@ -44,6 +50,9 @@ const SignIn = () => {
       onSubmit={handleSubmit}
       onChangeEmail={onChangeEmail}
       onChangePassword={onChangePassword}
+      emailValue={email}
+      passwordValue={password}
+      error={error}
     />
   );
 };

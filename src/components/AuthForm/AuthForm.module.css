@@ -11,6 +11,18 @@
   box-shadow: 5px 5px 60px 60px var(--secondary-lighter);
 }
 
+.error {
+  width: 25vw;
+  text-align: center;
+  position: absolute;
+  top: 15vh;
+  z-index: 2;
+  margin: 0;
+  padding: 0.3rem;
+  background-color: rgba(255, 0, 0, 0.371);
+  color: white;
+}
+
 .auth-link {
   text-decoration: none;
   color: inherit;
@@ -22,10 +34,18 @@
   text-decoration: underline;
 }
 
+.invalid {
+  background-color: rgba(255, 0, 0, 0.194);
+}
+
 @media (max-width: 1400px) {
   .auth-form {
     width: 40vw;
     min-height: 55vh;
+  }
+
+  .error {
+    width: 40vw;
   }
 }
 
@@ -34,11 +54,19 @@
     width: 50vw;
     min-height: 55vh;
   }
+
+  .error {
+    width: 50vw;
+  }
 }
 
 @media (max-width: 700px) {
   .auth-form {
     width: 85vw;
     max-width: 90vw;
+  }
+
+  .error {
+    width: 85vw;
   }
 }

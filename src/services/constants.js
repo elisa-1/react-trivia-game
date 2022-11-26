@@ -38,6 +38,12 @@ const UI_TEXT = {
     suggestSignUp: "Don't have an account yet? Sign Up",
   },
 
+  authFormErrors: {
+    alreadyInUse: "Email or password already in use.",
+    incorrectPassword: "The password you entered was incorrect.",
+    userNotFound: "There is no account for the email address you entered."
+  },
+
   modalButtons: {
     close: "Close",
     returnToMainMenu: "Return to Main Menu",

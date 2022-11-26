@@ -7,7 +7,7 @@ import { UserAuth } from "../authContext/AuthContext";
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [, setError] = useState("");
+  const [error, setError] = useState("");
   const { createUser, createUserDoc } = UserAuth();
   const navigate = useNavigate();
 
@@ -23,8 +23,11 @@ const SignUp = () => {
       await Promise.all([createUser(email, password), createUserDoc(email)]);
       navigate("/");
     } catch (err) {
-      setError(err.message);
-      console.log(err.message);
+      if (err.code === "auth/email-already-in-use") {
+        setError(UI_TEXT.authFormErrors.alreadyInUse);
+      } else {
+        setError(err.message);
+      }
     }
   };
 
@@ -44,6 +47,9 @@ const SignUp = () => {
       onSubmit={handleSubmit}
       onChangeEmail={onChangeEmail}
       onChangePassword={onChangePassword}
+      emailValue={email}
+      passwordValue={password}
+      error={error}
     />
   );
 };

@@ -62,7 +62,8 @@ export const reducer = (state, action) => {
     case ACTIONS.CALL_FRIEND_LIFELINE:
       return {
         modalShow: true,
-        modalContent: UI_TEXT.callFriendMessage + action.payload.correctAnswer,
+        modalContent:
+          UI_TEXT.callFriendMessage + action.payload.correctAnswer + ".",
         modalBackdrop: true,
         isModalClosable: true,
         safetyNetFlag: false,

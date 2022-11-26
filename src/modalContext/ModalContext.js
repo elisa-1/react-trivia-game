@@ -41,13 +41,13 @@ export const ModalProvider = ({ children }) => {
     dispatch({ type: ACTIONS.NO_ANSWER_SELECTED });
   };
 
-  const incorrectAnswerHandler = () => {
+  const incorrectAnswerHandler = useCallback(() => {
     dispatch({ type: ACTIONS.INCORRECT_ANSWER });
-  };
+  }, []);
 
-  const gameWonHandler = () => {
+  const gameWonHandler = useCallback(() => {
     dispatch({ type: ACTIONS.GAME_WON });
-  };
+  }, []);
 
   const logOutHandler = () => {
     dispatch({ type: ACTIONS.LOG_OUT });

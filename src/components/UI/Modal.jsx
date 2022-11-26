@@ -70,6 +70,9 @@ const Modal = (props) => {
         )}
       </BSModal.Body>
       <BSModal.Footer className={`m-0 border-0 d-flex justify-content-center`}>
+        {logOutFlag && (
+          <Button onClick={logOutHandler}>{UI_TEXT.modalButtons.logOut}</Button>
+        )}
         {props.isExitModal && (
           <Button onClick={() => clickHandler()}>
             {UI_TEXT.modalButtons.leaveGame}
@@ -82,9 +85,6 @@ const Modal = (props) => {
           <Button onClick={() => clickHandler()}>
             {UI_TEXT.modalButtons.returnToMainMenu}
           </Button>
-        )}
-        {logOutFlag && (
-          <Button onClick={logOutHandler}>{UI_TEXT.modalButtons.logOut}</Button>
         )}
       </BSModal.Footer>
     </BSModal>

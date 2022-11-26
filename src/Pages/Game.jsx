@@ -105,6 +105,20 @@ const Game = () => {
     }
   }, [questions, getUserDoc, user]);
 
+  useEffect(() => {
+    const storedGameOver = localStorage.getItem("gameOver");
+    const storedGameWon = localStorage.getItem("gameWon");
+    if (storedGameOver) {
+      incorrectAnswerHandler();
+      setTimerIsPaused(true);
+    }
+    if (storedGameWon) {
+      gameWonHandler();
+      setTimerIsPaused(true);
+    }
+    console.log("test");
+  }, [incorrectAnswerHandler, gameWonHandler]);
+
   const handleSelectedAnswer = (value) => {
     if (selectedAnswer !== value) setSelectedAnswer(value);
   };
@@ -160,6 +174,7 @@ const Game = () => {
     }
     if (selectedAnswer && !isCorrectAnswerSelected) {
       incorrectAnswerHandler();
+      localStorage.setItem("gameOver", "1");
       setTimerIsPaused(true);
       if (user) {
         updateGamesLostDoc();
@@ -176,6 +191,7 @@ const Game = () => {
     }
     if (isCorrectAnswerSelected && questionNo === questions.length - 1) {
       gameWonHandler();
+      localStorage.setItem("gameWon", "1");
       setTimerIsPaused(true);
       if (user) {
         updateGamesWonDoc();

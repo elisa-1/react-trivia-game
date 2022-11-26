@@ -24,6 +24,7 @@ const Header = () => {
     modalAdditionalClass,
     hideModalHandler,
     navigatesToMenu,
+    logOutHandler
   } = useModal();
 
   const { user, logout, setUserDocId, setUserData } = UserAuth();
@@ -93,14 +94,20 @@ const Header = () => {
     );
 
   const handleLogout = async () => {
-    try {
-      await logout();
-      setUserDocId("");
-      setUserData({});
-      navigate("/");
-    } catch (err) {
-      console.log(err.message);
-    }
+    logOutHandler();
+    
+    setTimeout(() => {
+      setExpanded(false);
+    }, 150);
+
+    // try {
+    //   await logout();
+    //   setUserDocId("");
+    //   setUserData({});
+    //   navigate("/");
+    // } catch (err) {
+    //   console.log(err.message);
+    // }
   };
 
   const userConnectedNavLinks = (
@@ -161,9 +168,6 @@ const Header = () => {
       <Button
         onClick={() => {
           handleLogout();
-          setTimeout(() => {
-            setExpanded(false);
-          }, 150);
         }}
       >
         Logout

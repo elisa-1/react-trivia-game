@@ -28,8 +28,11 @@ const SignIn = () => {
       }
       if (err.code === "auth/user-not-found") {
         setError(UI_TEXT.authFormErrors.userNotFound);
-      } else {
-        setError(err.message);
+      } if (err.code === "auth/too-many-requests") {
+        setError(UI_TEXT.authFormErrors.tooManyRequests);
+      }
+      else {
+        setError(err.code);
       }
     }
   };

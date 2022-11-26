@@ -22,6 +22,7 @@ export const ACTIONS = {
   GAME_WON: "GAME_WON",
   EXIT_GAME: "EXIT_GAME",
   EXIT_FOR_AUTH: "EXIT_FOR_AUTH",
+  LOG_OUT: "LOG_OUT",
 };
 
 export const reducer = (state, action) => {
@@ -38,6 +39,7 @@ export const reducer = (state, action) => {
         isModalClosable: false,
         modalAdditionalClass: "game-over",
         safetyNetFlag: false,
+        logOutFlag: false,
       };
     case ACTIONS.NO_ANSWER_SELECTED:
       return {
@@ -46,6 +48,7 @@ export const reducer = (state, action) => {
         modalBackdrop: true,
         isModalClosable: true,
         safetyNetFlag: false,
+        logOutFlag: false,
       };
     case ACTIONS.GAME_WON:
       return {
@@ -55,6 +58,7 @@ export const reducer = (state, action) => {
         isModalClosable: false,
         modalAdditionalClass: "game-won",
         safetyNetFlag: false,
+        logOutFlag: false,
       };
     case ACTIONS.CALL_FRIEND_LIFELINE:
       return {
@@ -64,6 +68,7 @@ export const reducer = (state, action) => {
         isModalClosable: true,
         modalAdditionalClass: "call-friend",
         safetyNetFlag: false,
+        logOutFlag: false,
       };
     case ACTIONS.ASK_THE_AUDIENCE_LIFELINE:
       return {
@@ -78,6 +83,7 @@ export const reducer = (state, action) => {
           answers: action.payload.answers,
         },
         safetyNetFlag: false,
+        logOutFlag: false,
       };
     case ACTIONS.TIME_EXPIRED:
       return {
@@ -87,6 +93,7 @@ export const reducer = (state, action) => {
         isModalClosable: false,
         modalAdditionalClass: "game-over",
         safetyNetFlag: false,
+        logOutFlag: false,
       };
     case ACTIONS.EXIT_GAME:
       return {
@@ -97,9 +104,10 @@ export const reducer = (state, action) => {
             : UI_TEXT.exitMessage + action.payload.value + ".",
         modalBackdrop: true,
         isModalClosable: true,
-        modalAdditionalClass: "ask-audience",
+        modalAdditionalClass: "",
         isExitModal: true,
         safetyNetFlag: true,
+        logOutFlag: false,
       };
     case ACTIONS.EXIT_FOR_AUTH:
       return {
@@ -107,11 +115,21 @@ export const reducer = (state, action) => {
         modalContent: UI_TEXT.exitMessageAuth,
         modalBackdrop: true,
         isModalClosable: true,
-        modalAdditionalClass: "ask-audience",
+        modalAdditionalClass: "",
         isExitModal: true,
         navigatesTo: action.payload.navigatesTo,
         safetyNetFlag: false,
+        logOutFlag: false,
       };
+      case ACTIONS.LOG_OUT :
+        return {
+          modalShow: true,
+          modalContent: UI_TEXT.logOutMessage,
+          modalBackdrop: true,
+          isModalClosable: true,
+          modalAdditionalClass: "",
+          logOutFlag: true,  
+        }
     default:
       throw new Error(`No case for type ${action.type} found.`);
   }

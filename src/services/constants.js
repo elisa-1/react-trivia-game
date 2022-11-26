@@ -14,6 +14,7 @@ const UI_TEXT = {
     "Are you sure you want to leave the game? If you leave now, you only take $",
   exitMessageAuth:
     "Are you sure you want to leave the game? Your progress will not be saved.",
+  logOutMessage: "Are you sure you want to log out?",
 
   gameStats: {
     gamesStarted: "Number of games started: ",
@@ -41,7 +42,9 @@ const UI_TEXT = {
   authFormErrors: {
     alreadyInUse: "Email or password already in use.",
     incorrectPassword: "The password you entered was incorrect.",
-    userNotFound: "There is no account for the email address you entered."
+    userNotFound: "There is no account for the email address you entered.",
+    tooManyRequests:
+      "You sent too many incorrect sign in requests to the server. Try again later.",
   },
 
   modalButtons: {
@@ -50,6 +53,7 @@ const UI_TEXT = {
     leaveGame: "Leave Game",
     goToSignIn: "Sign In",
     goToSignUp: "Sign Up",
+    logOut: "Log Out"
   },
 };
 

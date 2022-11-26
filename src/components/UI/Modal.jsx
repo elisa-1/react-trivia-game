@@ -11,8 +11,9 @@ import styles from "./Modal.module.css";
 
 const Modal = (props) => {
   const navigate = useNavigate();
-  const { user, userDocId } = UserAuth();
-  const { hideModalHandler, navigatesTo, safetyNetFlag } = useModal();
+  const { user, logout, setUserDocId, setUserData, userDocId } = UserAuth();
+  const { hideModalHandler, navigatesTo, safetyNetFlag, logOutFlag } =
+    useModal();
 
   const returnToMainMenu = () => {
     navigate("/");
@@ -33,6 +34,18 @@ const Modal = (props) => {
       returnToMainMenu();
     } else {
       navigate(navigatesTo);
+    }
+    hideModalHandler();
+  };
+
+  const logOutHandler = async () => {
+    try {
+      await logout();
+      setUserDocId("");
+      setUserData({});
+      navigate("/");
+    } catch (err) {
+      console.log(err.message);
     }
     hideModalHandler();
   };
@@ -71,6 +84,9 @@ const Modal = (props) => {
           <Button onClick={() => clickHandler()}>
             {UI_TEXT.modalButtons.returnToMainMenu}
           </Button>
+        )}
+        {logOutFlag && (
+          <Button onClick={logOutHandler}>{UI_TEXT.modalButtons.logOut}</Button>
         )}
       </BSModal.Footer>
     </BSModal>

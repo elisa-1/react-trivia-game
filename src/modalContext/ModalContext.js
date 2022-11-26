@@ -49,6 +49,10 @@ export const ModalProvider = ({ children }) => {
     dispatch({ type: ACTIONS.GAME_WON });
   };
 
+  const logOutHandler = () => {
+    dispatch({ type: ACTIONS.LOG_OUT });
+  };
+
   const exitForAuthHandler = (navigatesTo) => {
     if (localStorage.getItem("gameStarted") === "1") {
       dispatch({
@@ -68,6 +72,7 @@ export const ModalProvider = ({ children }) => {
     isExitModal: modalState.isExitModal,
     safetyNetFlag: modalState.safetyNetFlag,
     navigatesTo: modalState.navigatesTo,
+    logOutFlag: modalState.logOutFlag,
     askTheAudienceHandler,
     callAFriendHandler,
     timeExpiredHandler,
@@ -76,6 +81,7 @@ export const ModalProvider = ({ children }) => {
     noAnswerSelectedHandler,
     incorrectAnswerHandler,
     gameWonHandler,
+    logOutHandler,
     exitForAuthHandler,
   };
 

@@ -3,7 +3,7 @@
 }
 
 .main-game-stats ul {
-  width: 25vw;
+  width: 35vw;
   min-height: 50vh;
   height: auto;
   border-radius: 3%;
@@ -15,9 +15,14 @@
   box-shadow: 5px 5px 60px 60px var(--secondary-lighter);
   font-size: 1.1rem;
   letter-spacing: 0.1rem;
+  line-height: 1.7rem;
 }
 
-@media (max-width: 1100px) {
+.main-game-stats ul li span {
+  font-weight: bold;
+}
+
+@media (max-width: 1200px) {
   .main-game-stats ul {
     width: 50vw;
     min-height: 55vh;
@@ -26,9 +31,14 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .main-game-stats ul {
-    width: auto;
-    max-width: 90vw;
+    width: 80vw;
+  }
+}
+
+@media (max-width: 600px) {
+  .main-game-stats ul {
+    width: 95vw;
   }
 }

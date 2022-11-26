@@ -1,6 +1,9 @@
 import { useNavigate } from "react-router-dom";
+import { doc, updateDoc, increment } from "firebase/firestore";
 import useModal from "../../modalContext/ModalContext";
+import { UserAuth } from "../../authContext/AuthContext";
 import { UI_TEXT } from "../../services/constants";
+import { db } from "../../firebase/firebaseConfig";
 import { Modal as BSModal } from "react-bootstrap";
 import AskAudienceBars from "../Lifeline/AskAudienceBars";
 import Button from "./Button";
@@ -8,15 +11,27 @@ import styles from "./Modal.module.css";
 
 const Modal = (props) => {
   const navigate = useNavigate();
-  const { hideModalHandler, navigatesTo } = useModal();
+  const { user, userDocId } = UserAuth();
+  const { hideModalHandler, navigatesTo, safetyNetFlag } = useModal();
 
   const returnToMainMenu = () => {
     navigate("/");
   };
 
+  const updateGamesEndedDoc = async () => {
+    const userDoc = doc(db, "stats", userDocId);
+    await updateDoc(userDoc, {
+      gamesEnded: increment(1),
+    });
+  };
+
   const clickHandler = () => {
-    if (navigatesTo === "/" || !navigatesTo) returnToMainMenu();
-    else {
+    if (navigatesTo === "/" || !navigatesTo) {
+      if (user && safetyNetFlag) {
+        updateGamesEndedDoc();
+      }
+      returnToMainMenu();
+    } else {
       navigate(navigatesTo);
     }
     hideModalHandler();

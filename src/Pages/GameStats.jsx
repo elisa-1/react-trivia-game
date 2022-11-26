@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { UserAuth } from "../authContext/AuthContext";
 import { getMostCommon } from "../services/utils";
+import { UI_TEXT } from "../services/constants";
 import Spinner from "../components/UI/Spinner";
 import styles from "./GameStats.module.css";
 
@@ -12,8 +13,6 @@ const GameStats = () => {
     getUserDoc(user);
   }, [getUserDoc, user]);
 
-  console.log();
-
   return (
     <main
       className={`d-flex justify-content-center align-items-center ${styles["main-game-stats"]}`}
@@ -22,28 +21,46 @@ const GameStats = () => {
         {Object.keys(userData).length > 0 ? (
           <>
             <li>
-              Number of games started: <strong>{userData.gamesStarted}</strong>{" "}
+              {UI_TEXT.gameStats.gamesStarted}
+              <span>{userData.gamesStarted}</span>
             </li>
             <br />
-            <li>Number of games won ($1,000,000): </li>
-            <li>Number of games ended (safety net): </li>
-            <li>Number of games lost: raspuns incorect sau time expired </li>
-            <li>Number of games abandoned: inchise din header </li>
+            <li>
+              {UI_TEXT.gameStats.gamesWon}
+              <span>{userData.gamesWon}</span>
+            </li>
+            <li>
+              {UI_TEXT.gameStats.gamesEnded}
+              <span>{userData.gamesEnded}</span>
+            </li>
+            <li>
+              {UI_TEXT.gameStats.gamesLost}
+              <span>{userData.gamesLost}</span>
+            </li>
+            <li>
+              {UI_TEXT.gameStats.gamesAbandoned}
+              <span>
+                {userData.gamesStarted -
+                  userData.gamesWon -
+                  userData.gamesEnded -
+                  userData.gamesLost}
+              </span>
+            </li>
             <br />
             <li>
-              Preferred category:{" "}
-              <strong>
+              {UI_TEXT.gameStats.preferredCategory}
+              <span>
                 {userData.gamesStarted
                   ? getMostCommon(userData.categories)
                   : "-"}
-              </strong>
+              </span>
             </li>
             <br />
-            <li>Average time to answer: </li>
+            <li> {UI_TEXT.gameStats.averageTimeToAnswer}</li>
             <br />
             <li>
-              Total number of lifelines used:{" "}
-              <strong>{userData.lifelinesUsed}</strong>{" "}
+              {UI_TEXT.gameStats.lifelinesUsed}
+              <span>{userData.lifelinesUsed}</span>{" "}
             </li>
           </>
         ) : (

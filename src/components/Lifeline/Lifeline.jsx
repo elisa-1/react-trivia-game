@@ -6,7 +6,7 @@ import styles from "./Lifeline.module.css";
 
 const Lifeline = (props) => {
   const [isClickable, setIsClickable] = useState(true);
-  const { userDocId } = UserAuth();
+  const { user, userDocId } = UserAuth();
 
   const updateLifelinesNumberDoc = async () => {
     const userDoc = doc(db, "stats", userDocId);
@@ -19,7 +19,7 @@ const Lifeline = (props) => {
     props.onClick();
     setIsClickable(false);
     localStorage.setItem(`${type}`, "clicked");
-    updateLifelinesNumberDoc();
+    if (user) updateLifelinesNumberDoc();
   };
 
   const disabledState =

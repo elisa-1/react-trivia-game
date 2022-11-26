@@ -3,7 +3,8 @@ const UI_TEXT = {
   incorrectAnswer: "Sorry. The answer was incorrect. Game over.",
   noAnswerSelected: "Please select an answer.",
   gameWon: "Congratulations. You won 1,000,000$!",
-  callFriendMessage: "Friend: I am not sure, but I think that the correct answer is ",
+  callFriendMessage:
+    "Friend: I am not sure, but I think that the correct answer is ",
   askTheAudienceMessage: "See below what our audience thinks: ",
   timeExpired: "Sorry. Your time expired. Game over.",
   exitButtonMessage: "GET $",
@@ -13,6 +14,17 @@ const UI_TEXT = {
     "Are you sure you want to leave the game? If you leave now, you only take $",
   exitMessageAuth:
     "Are you sure you want to leave the game? Your progress will not be saved.",
+
+  gameStats: {
+    gamesStarted: "Number of games started: ",
+    gamesWon: "Number of games won ($1,000,000): ",
+    gamesEnded: "Number of games ended (safety net): ",
+    gamesLost: "Number of games lost: ",
+    gamesAbandoned: "Number of games abandoned: ",
+    preferredCategory: "Preferred category: ",
+    averageTimeToAnswer: "Average time to answer: ",
+    lifelinesUsed: "Total number of lifelines used: "
+  },
 
   authForm: {
     emailLabel: "Email address:",

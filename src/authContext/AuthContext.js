@@ -31,6 +31,9 @@ export const AuthContextProvider = ({ children }) => {
     return addDoc(statsCollectionRef, {
       email: email,
       gamesStarted: 0,
+      gamesWon: 0,
+      gamesEnded: 0,
+      gamesLost: 0,
       categories: [],
       lifelinesUsed: 0
     });

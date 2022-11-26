@@ -62,7 +62,7 @@ const Home = () => {
     ev.preventDefault();
     const category = selectedCategory.toLocaleLowerCase().split(" ")[0];
     localStorage.setItem("gameStarted", "1");
-    updateUserDoc();
+    if (user) updateUserDoc();
     navigate(`/game/${category}`);
   };
 

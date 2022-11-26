@@ -37,6 +37,7 @@ export const reducer = (state, action) => {
         modalBackdrop: "static",
         isModalClosable: false,
         modalAdditionalClass: "game-over",
+        safetyNetFlag: false,
       };
     case ACTIONS.NO_ANSWER_SELECTED:
       return {
@@ -44,6 +45,7 @@ export const reducer = (state, action) => {
         modalContent: UI_TEXT.noAnswerSelected,
         modalBackdrop: true,
         isModalClosable: true,
+        safetyNetFlag: false,
       };
     case ACTIONS.GAME_WON:
       return {
@@ -52,6 +54,7 @@ export const reducer = (state, action) => {
         modalBackdrop: "static",
         isModalClosable: false,
         modalAdditionalClass: "game-won",
+        safetyNetFlag: false,
       };
     case ACTIONS.CALL_FRIEND_LIFELINE:
       return {
@@ -60,6 +63,7 @@ export const reducer = (state, action) => {
         modalBackdrop: true,
         isModalClosable: true,
         modalAdditionalClass: "call-friend",
+        safetyNetFlag: false,
       };
     case ACTIONS.ASK_THE_AUDIENCE_LIFELINE:
       return {
@@ -73,6 +77,7 @@ export const reducer = (state, action) => {
           correctAnswer: action.payload.correctAnswer,
           answers: action.payload.answers,
         },
+        safetyNetFlag: false,
       };
     case ACTIONS.TIME_EXPIRED:
       return {
@@ -81,6 +86,7 @@ export const reducer = (state, action) => {
         modalBackdrop: "static",
         isModalClosable: false,
         modalAdditionalClass: "game-over",
+        safetyNetFlag: false,
       };
     case ACTIONS.EXIT_GAME:
       return {
@@ -93,6 +99,7 @@ export const reducer = (state, action) => {
         isModalClosable: true,
         modalAdditionalClass: "ask-audience",
         isExitModal: true,
+        safetyNetFlag: true,
       };
     case ACTIONS.EXIT_FOR_AUTH:
       return {
@@ -102,7 +109,8 @@ export const reducer = (state, action) => {
         isModalClosable: true,
         modalAdditionalClass: "ask-audience",
         isExitModal: true,
-        navigatesTo: action.payload.navigatesTo
+        navigatesTo: action.payload.navigatesTo,
+        safetyNetFlag: false,
       };
     default:
       throw new Error(`No case for type ${action.type} found.`);

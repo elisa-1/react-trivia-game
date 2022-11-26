@@ -66,6 +66,7 @@ export const ModalProvider = ({ children }) => {
     isModalClosable: modalState.isModalClosable,
     modalAskAudience: modalState.modalAskAudience,
     isExitModal: modalState.isExitModal,
+    safetyNetFlag: modalState.safetyNetFlag,
     navigatesTo: modalState.navigatesTo,
     askTheAudienceHandler,
     callAFriendHandler,

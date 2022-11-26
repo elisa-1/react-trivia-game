@@ -1,7 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
+import { useParams } from "react-router-dom";
+import { doc, updateDoc, increment } from "firebase/firestore";
+import { db } from "../firebase/firebaseConfig";
 import useModal from "../modalContext/ModalContext";
 import { UserAuth } from "../authContext/AuthContext";
-import { useParams } from "react-router-dom";
 import { getQuestions } from "../services/api";
 import { listLetters } from "../services/constants";
 import { randomSort, sortQuestionsByDifficulty } from "../services/utils";
@@ -15,7 +17,7 @@ import Spinner from "../components/UI/Spinner";
 import styles from "./Game.module.css";
 
 const Game = () => {
-  const { getUserDoc, user } = UserAuth();
+  const { getUserDoc, user, userDocId } = UserAuth();
 
   const {
     modalShow,
@@ -158,6 +160,7 @@ const Game = () => {
     if (selectedAnswer && !isCorrectAnswerSelected) {
       incorrectAnswerHandler();
       setTimerIsPaused(true);
+      if (user) updateGamesLostDoc();
     }
     if (isCorrectAnswerSelected && questionNo < questions.length - 1) {
       setQuestionNo((prevNo) => prevNo + 1);
@@ -166,8 +169,29 @@ const Game = () => {
     }
     if (isCorrectAnswerSelected && questionNo === questions.length - 1) {
       gameWonHandler();
+      if (user) updateGamesWonDoc();
     }
     setSelectedAnswer("");
+  };
+
+  const handleTimeExpired = useCallback(() => {
+    timeExpiredHandler();
+    if (user) updateGamesLostDoc();
+    // eslint-disable-next-line
+  }, [timeExpiredHandler]);
+
+  const updateGamesWonDoc = async () => {
+    const userDoc = doc(db, "stats", userDocId);
+    await updateDoc(userDoc, {
+      gamesWon: increment(1),
+    });
+  };
+
+  const updateGamesLostDoc = async () => {
+    const userDoc = doc(db, "stats", userDocId);
+    await updateDoc(userDoc, {
+      gamesLost: increment(1),
+    });
   };
 
   const handleSubmit = (ev) => {
@@ -194,7 +218,7 @@ const Game = () => {
           <Exit questionNo={questionNo} handleExit={handleExit} />
           <Timer
             timerValue={20}
-            handleTimeExpired={timeExpiredHandler}
+            handleTimeExpired={handleTimeExpired}
             timerIsReset={timerIsReset}
             timerIsPaused={timerIsPaused}
           />

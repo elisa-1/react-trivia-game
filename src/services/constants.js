@@ -24,7 +24,7 @@ const UI_TEXT = {
     preferredCategory: "Preferred category: ",
     totalQuestionsAnswered: "Total number of questions answered: ",
     averageTimeToAnswer: "Average time to answer: ",
-    lifelinesUsed: "Total number of lifelines used: "
+    lifelinesUsed: "Total number of lifelines used: ",
   },
 
   authForm: {
@@ -32,7 +32,8 @@ const UI_TEXT = {
     passwordLabel: "Password:",
     emailText: "We'll never share your email with anyone else.",
     passwordText:
-      "Passwords must have at least 8 characters and contain at least two of the following: uppercase letters, lowercase letters, numbers, and symbols.",
+      "Passwords must have at least 8 characters and contain at least one uppercase letter, one lowercase letter, one number, and one symbol.",
+    emailText: "Please enter a valid email address",
     suggestSignIn: "Already a member? Sign In.",
     suggestSignUp: "Don't have an account yet? Sign Up",
   },

@@ -22,6 +22,9 @@ const AuthForm = (props) => {
         <BSForm.Group className="mb-3" controlId="formBasicEmail">
           <BSForm.Label>{UI_TEXT.authForm.emailLabel}</BSForm.Label>
           <BSForm.Control
+            // required
+            title={UI_TEXT.authForm.emailText}
+            pattern="[a-zA-Z0-9._+-]+@[a-zA-Z0-9_-]+\.+[a-zA-Z0-9-\.]{2,}"
             type="email"
             placeholder="Enter email"
             onChange={(event) => props.onChangeEmail(event.target.value)}
@@ -36,6 +39,9 @@ const AuthForm = (props) => {
         <BSForm.Group className="mb-3" controlId="formBasicPassword">
           <BSForm.Label> {UI_TEXT.authForm.passwordLabel}</BSForm.Label>
           <BSForm.Control
+            required
+            title={UI_TEXT.authForm.passwordText}
+            pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^\da-zA-Z])(.{8,})$"
             type="password"
             placeholder="Password"
             onChange={(event) => props.onChangePassword(event.target.value)}

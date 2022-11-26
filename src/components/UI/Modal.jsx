@@ -57,9 +57,7 @@ const Modal = (props) => {
       centered
       backdrop={props.backdrop}
       contentClassName={`${styles["modal-content"]}`}
-      backdropClassName={`${styles["modal-backdrop"]} ${
-        styles[props.modalAdditionalClass]
-      }`}
+      backdropClassName={`${styles["modal-backdrop"]}`}
     >
       <BSModal.Header className="border-0"></BSModal.Header>
       <BSModal.Body className={`text-center ${styles["modal-body"]}`}>

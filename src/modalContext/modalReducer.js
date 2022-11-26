@@ -4,11 +4,12 @@ export const initialState = {
   modalShow: false,
   modalContent: "",
   modalBackdrop: true,
-  modalAdditionalClass: "",
   isModalClosable: true,
   modalAskAudience: {},
   isExitModal: false,
   navigatesTo: "",
+  safetyNetFlag: "",
+  logOutFlag: "",
 };
 
 export const ACTIONS = {
@@ -37,7 +38,6 @@ export const reducer = (state, action) => {
         modalContent: UI_TEXT.incorrectAnswer,
         modalBackdrop: "static",
         isModalClosable: false,
-        modalAdditionalClass: "game-over",
         safetyNetFlag: false,
         logOutFlag: false,
       };
@@ -56,7 +56,6 @@ export const reducer = (state, action) => {
         modalContent: UI_TEXT.gameWon,
         modalBackdrop: "static",
         isModalClosable: false,
-        modalAdditionalClass: "game-won",
         safetyNetFlag: false,
         logOutFlag: false,
       };
@@ -66,7 +65,6 @@ export const reducer = (state, action) => {
         modalContent: UI_TEXT.callFriendMessage + action.payload.correctAnswer,
         modalBackdrop: true,
         isModalClosable: true,
-        modalAdditionalClass: "call-friend",
         safetyNetFlag: false,
         logOutFlag: false,
       };
@@ -76,7 +74,6 @@ export const reducer = (state, action) => {
         modalContent: UI_TEXT.askTheAudienceMessage,
         modalBackdrop: true,
         isModalClosable: true,
-        modalAdditionalClass: "ask-audience",
         modalAskAudience: {
           state: true,
           correctAnswer: action.payload.correctAnswer,
@@ -91,7 +88,6 @@ export const reducer = (state, action) => {
         modalContent: UI_TEXT.timeExpired,
         modalBackdrop: "static",
         isModalClosable: false,
-        modalAdditionalClass: "game-over",
         safetyNetFlag: false,
         logOutFlag: false,
       };
@@ -104,7 +100,6 @@ export const reducer = (state, action) => {
             : UI_TEXT.exitMessage + action.payload.value + ".",
         modalBackdrop: true,
         isModalClosable: true,
-        modalAdditionalClass: "",
         isExitModal: true,
         safetyNetFlag: true,
         logOutFlag: false,
@@ -115,21 +110,19 @@ export const reducer = (state, action) => {
         modalContent: UI_TEXT.exitMessageAuth,
         modalBackdrop: true,
         isModalClosable: true,
-        modalAdditionalClass: "",
         isExitModal: true,
         navigatesTo: action.payload.navigatesTo,
         safetyNetFlag: false,
         logOutFlag: false,
       };
-      case ACTIONS.LOG_OUT :
-        return {
-          modalShow: true,
-          modalContent: UI_TEXT.logOutMessage,
-          modalBackdrop: true,
-          isModalClosable: true,
-          modalAdditionalClass: "",
-          logOutFlag: true,  
-        }
+    case ACTIONS.LOG_OUT:
+      return {
+        modalShow: true,
+        modalContent: UI_TEXT.logOutMessage,
+        modalBackdrop: true,
+        isModalClosable: true,
+        logOutFlag: true,
+      };
     default:
       throw new Error(`No case for type ${action.type} found.`);
   }

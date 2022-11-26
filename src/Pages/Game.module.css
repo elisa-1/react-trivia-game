@@ -11,7 +11,9 @@
   .game-section {
     gap: 2rem;
   }
+}
 
+@media (max-width: 768px) {
   .game-section {
     flex-direction: column-reverse;
   }

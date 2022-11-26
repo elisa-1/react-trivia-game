@@ -100,7 +100,7 @@ const Game = () => {
   }, [questions, questionNo, storedCurrentAnswers]);
 
   useEffect(() => {
-    if (questions) {
+    if (questions && user) {
       getUserDoc(user);
     }
   }, [questions, getUserDoc, user]);
@@ -195,6 +195,7 @@ const Game = () => {
       ),
     });
   };
+
   const updateGamesWonDoc = async () => {
     const userDoc = doc(db, "stats", userDocId);
     await updateDoc(userDoc, {

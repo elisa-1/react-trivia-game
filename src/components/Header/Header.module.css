@@ -33,6 +33,12 @@
   margin: 0 1rem;
 }
 
+@media (max-width: 1000px) {
+  .header {
+    font-size: 0.9rem;
+  }
+}
+
 @media (max-width: 768px) {
   .navbar-text {
     border-top: 1px solid var(--main-darker);

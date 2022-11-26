@@ -37,14 +37,22 @@ const Header = () => {
         <Link
           className="nav-link"
           to="/signin"
-          onClick={() => setExpanded(false)}
+          onClick={() =>
+            setTimeout(() => {
+              setExpanded(false);
+            }, 150)
+          }
         >
           Sign In
         </Link>
         <Link
           className="nav-link"
           to="/signup"
-          onClick={() => setExpanded(false)}
+          onClick={() =>
+            setTimeout(() => {
+              setExpanded(false);
+            }, 150)
+          }
         >
           Sign Up
         </Link>
@@ -54,7 +62,9 @@ const Header = () => {
         <Nav.Link
           onClick={() => {
             exitForAuthHandler("/");
-            setExpanded(false);
+            setTimeout(() => {
+              setExpanded(false);
+            }, 150);
           }}
         >
           Home
@@ -62,7 +72,9 @@ const Header = () => {
         <Nav.Link
           onClick={() => {
             exitForAuthHandler("/signin");
-            setExpanded(false);
+            setTimeout(() => {
+              setExpanded(false);
+            }, 150);
           }}
         >
           Sign In
@@ -70,7 +82,9 @@ const Header = () => {
         <Nav.Link
           onClick={() => {
             exitForAuthHandler("/signup");
-            setExpanded(false);
+            setTimeout(() => {
+              setExpanded(false);
+            }, 150);
           }}
         >
           Sign Up
@@ -93,13 +107,25 @@ const Header = () => {
     <>
       {storedGameStartedFlag !== "1" ? (
         <>
-          <Link className="nav-link" to="/" onClick={() => setExpanded(false)}>
+          <Link
+            className="nav-link"
+            to="/"
+            onClick={() =>
+              setTimeout(() => {
+                setExpanded(false);
+              }, 150)
+            }
+          >
             Home
           </Link>
           <Link
-            className="nav-link"
+            className="nav-link mb-1 mb-md-0"
             to="/gamestats"
-            onClick={() => setExpanded(false)}
+            onClick={() =>
+              setTimeout(() => {
+                setExpanded(false);
+              }, 150)
+            }
           >
             Game Stats
           </Link>
@@ -109,28 +135,35 @@ const Header = () => {
           <Nav.Link
             onClick={() => {
               exitForAuthHandler("/");
-              setExpanded(false);
+              setTimeout(() => {
+                setExpanded(false);
+              }, 150);
             }}
           >
             Home
           </Nav.Link>
           <Nav.Link
+            className="mb-1 mb-md-0"
             onClick={() => {
               exitForAuthHandler("/gamestats");
-              setExpanded(false);
+              setTimeout(() => {
+                setExpanded(false);
+              }, 150);
             }}
           >
             Game Stats
           </Nav.Link>
         </>
       )}
-      <Navbar.Text className={`${styles["navbar-text"]}`}>
+      <Navbar.Text className={`mb-1 mb-md-0 ${styles["navbar-text"]}`}>
         Signed in as: {user?.email}
       </Navbar.Text>
       <Button
         onClick={() => {
           handleLogout();
-          setExpanded(false);
+          setTimeout(() => {
+            setExpanded(false);
+          }, 150);
         }}
       >
         Logout

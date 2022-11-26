@@ -49,7 +49,7 @@ const Game = () => {
   const [selectedAnswer, setSelectedAnswer] = useState("");
   const [timerIsReset, setTimerIsReset] = useState(false);
   const [timerIsPaused, setTimerIsPaused] = useState(false);
-  const timerValue = 20;
+  const timerValue = 2000;
 
   const { category } = useParams();
 
@@ -161,27 +161,35 @@ const Game = () => {
     if (selectedAnswer && !isCorrectAnswerSelected) {
       incorrectAnswerHandler();
       setTimerIsPaused(true);
-      if (user) updateGamesLostDoc();
-      updateTimeDoc();
+      if (user) {
+        updateGamesLostDoc();
+        updateTimeDoc();
+      }
     }
     if (isCorrectAnswerSelected && questionNo < questions.length - 1) {
       setQuestionNo((prevNo) => prevNo + 1);
       localStorage.removeItem("currentAnswers");
       setTimerIsReset(true);
-      updateTimeDoc();
+      if (user) {
+        updateTimeDoc();
+      }
     }
     if (isCorrectAnswerSelected && questionNo === questions.length - 1) {
       gameWonHandler();
       setTimerIsPaused(true);
-      if (user) updateGamesWonDoc();
-      updateTimeDoc();
+      if (user) {
+        updateGamesWonDoc();
+        updateTimeDoc();
+      }
     }
     setSelectedAnswer("");
   };
 
   const handleTimeExpired = useCallback(() => {
     timeExpiredHandler();
-    if (user) updateGamesLostDoc();
+    if (user) {
+      updateGamesLostDoc();
+    }
     // eslint-disable-next-line
   }, [timeExpiredHandler]);
 

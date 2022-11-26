@@ -168,7 +168,6 @@ const Game = () => {
       setQuestionNo((prevNo) => prevNo + 1);
       localStorage.removeItem("currentAnswers");
       setTimerIsReset(true);
-      console.log(localStorage.getItem("remainingTime"));
       updateTimeDoc();
     }
     if (isCorrectAnswerSelected && questionNo === questions.length - 1) {

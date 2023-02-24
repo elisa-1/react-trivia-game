@@ -1,0 +1,39 @@
+main {
+  background: var(--secondary);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  flex: 1;
+}
+
+.main-home {
+  gap: 10rem;
+  background-image: url("../assets/white-wave.png");
+}
+
+.main-image img {
+  max-width: 25vw;
+  height: auto;
+  border-radius: 50%;
+  -webkit-box-shadow: 5px 5px 60px 60px var(--secondary-lighter);
+  box-shadow: 5px 5px 60px 60px var(--secondary-lighter);
+}
+
+@media (max-width: 1000px) {
+  .main-home {
+    padding-top: 0.5rem;
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-home {
+    flex-direction: column-reverse;
+  }
+
+  .main-image img {
+    max-width: 20vw;
+    -webkit-box-shadow: 5px 50px 60px 60px var(--secondary-lighter);
+    box-shadow: 5px 50px 60px 60px var(--secondary-lighter);
+  }
+}

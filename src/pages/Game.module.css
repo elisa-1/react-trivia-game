@@ -1,0 +1,20 @@
+.main-game {
+  background-image: url("../assets/game-background.jpg");
+}
+
+.game-section {
+  width: 100%;
+  gap: 10rem;
+}
+
+@media (max-width: 1100px) {
+  .game-section {
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .game-section {
+    flex-direction: column-reverse;
+  }
+}

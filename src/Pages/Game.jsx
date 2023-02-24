@@ -116,7 +116,6 @@ const Game = () => {
       gameWonHandler();
       setTimerIsPaused(true);
     }
-    console.log("test");
   }, [incorrectAnswerHandler, gameWonHandler]);
 
   const handleSelectedAnswer = (value) => {

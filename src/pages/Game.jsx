@@ -86,7 +86,7 @@ const Game = () => {
       } else {
         let answers = randomSort([
           ...questions[questionNo].incorrectAnswers,
-          `${questions[questionNo].correctAnswer} ***`,
+          questions[questionNo].correctAnswer
         ]);
         const finalAnswers = answers.map(
           (answer, index) => (answer = `${listLetters[index]}. ${answer}`)

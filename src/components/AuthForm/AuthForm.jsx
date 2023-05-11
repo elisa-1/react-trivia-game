@@ -34,7 +34,7 @@ const AuthForm = (props) => {
           />
           {props.formType === "signup" && (
             <BSForm.Text className="text-muted">
-              {UI_TEXT.authForm.emailText}
+              {UI_TEXT.authForm.emailDisclaimer}
             </BSForm.Text>
           )}
         </BSForm.Group>

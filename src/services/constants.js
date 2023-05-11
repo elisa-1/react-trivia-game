@@ -31,7 +31,7 @@ const UI_TEXT = {
   authForm: {
     emailLabel: "Email address:",
     passwordLabel: "Password:",
-    emailText: "We'll never share your email with anyone else.",
+    emailDisclaimer: "We'll never share your email with anyone else.",
     passwordText:
       "Passwords must have at least 8 characters and contain at least one uppercase letter, one lowercase letter, one number, and one symbol.",
     emailText: "Please enter a valid email address",

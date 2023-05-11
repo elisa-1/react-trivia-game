@@ -27,7 +27,7 @@ const Header = () => {
     logOutHandler
   } = useModal();
 
-  const { user, logout, setUserDocId, setUserData } = UserAuth();
+  const { user } = UserAuth();
 
   const noUserNavLinks =
     storedGameStartedFlag !== "1" ? (
